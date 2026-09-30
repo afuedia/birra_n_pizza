@@ -1,0 +1,198 @@
+/* ==========================================================================
+   RESET — Birra N Pizza
+   --------------------------------------------------------------------------
+   Qué es un reset:
+   Cada navegador aplica sus propios estilos por defecto (márgenes, tamaños,
+   fuentes de formulario...). El reset corrige esos valores para que todos los
+   navegadores partan de la MISMA base y para quitar comportamientos que casi
+   nunca queremos.
+
+   Qué NO es:
+   No es diseño. Aquí no hay colores, fuentes de marca ni tamaños: eso va en
+   tokens.css (valores) y styles.css (aplicación).
+
+   Reset "moderno" (2026) frente a los clásicos:
+   - Los resets antiguos (Eric Meyer, 2008) borraban TODO. Los normalizadores
+     (normalize.css) igualaban navegadores sin quitar nada.
+   - Hoy los navegadores son bastante coherentes, así que un reset moderno es
+     CORTO y combina las dos ideas: corrige lo poco que falla y añade mejoras
+     de accesibilidad y de CSS actual.
+   Basado en los resets de Josh Comeau y Andy Bell, adaptado y comentado.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   CAPA DE CASCADA (@layer)
+   Todo el reset va dentro de una capa llamada "reset".
+   Regla clave: los estilos SIN capa (los de styles.css) siempre ganan a los
+   que están DENTRO de una capa, sin importar la especificidad.
+   Ejemplo: ul[role="list"] tiene más especificidad que .menu, así que sin
+   capa, .menu { list-style: disc; } perdería. Con la capa, gana .menu.
+   Resultado: el reset nunca "pelea" con nuestros estilos.
+   -------------------------------------------------------------------------- */
+@layer reset {
+
+  /* 1. MODELO DE CAJA
+     Por defecto (content-box), width solo mide el contenido: si añades
+     padding o borde, la caja crece. Con border-box, width es el tamaño
+     TOTAL, incluidos padding y borde. Mucho más predecible.
+     ::before y ::after se incluyen porque también son cajas. */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* 2. MÁRGENES POR DEFECTO
+     El navegador pone márgenes a h1, p, ul, figure, body...
+     Los quitamos para que TODO el espaciado venga de nuestros tokens
+     (--space-*) y no de valores que no hemos decidido.
+     Excepción: <dialog>, que usa margin: auto para centrarse. */
+  *:not(dialog) {
+    margin: 0;
+  }
+
+  /* 3. TEXTO EN MÓVILES
+     Safari en iOS agranda la letra por su cuenta al girar el móvil en
+     horizontal. Lo desactivamos: el tamaño lo controlamos nosotros
+     (con rem, que sí respeta la configuración de la persona usuaria). */
+  html {
+    -webkit-text-size-adjust: none;  /* Prefijo: Safari aún lo necesita */
+    text-size-adjust: none;
+  }
+
+  /* 4. CUERPO DEL DOCUMENTO */
+  body {
+    /* La página ocupa al menos toda la pantalla, aunque tenga poco contenido
+       (así el footer no queda flotando a media altura).
+       svh = "small viewport height": en móvil descuenta la barra del
+       navegador. El antiguo 100vh la ignoraba y provocaba scroll. */
+    min-height: 100svh;
+
+    /* Altura de línea de seguridad para cualquier texto que no tenga una
+       definida en styles.css. El valor por defecto (~1.2) es demasiado
+       apretado para leer. */
+    line-height: 1.5;
+  }
+
+  /* 5. IMÁGENES Y MULTIMEDIA
+     - display: block → por defecto son "inline" y dejan un hueco de unos
+       píxeles debajo (el espacio reservado para letras como g, p, y).
+     - max-width: 100% → nunca se salen de su contenedor.
+     - height: auto → al reducir el ancho, mantienen la proporción.
+     Por eso en el HTML SIEMPRE ponemos width y height en <img>: el navegador
+     reserva el hueco antes de que cargue y la página no "salta". */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  /* 6. FORMULARIOS
+     Curiosidad histórica: los controles de formulario NO heredan la fuente
+     de la página, usan la del sistema. Con esto usan la misma tipografía
+     que el resto de la web. "font" es la propiedad abreviada: hereda
+     familia, tamaño, peso y altura de línea de una vez. */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* Un textarea sin atributo rows es muy bajo por defecto. */
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  /* 7. TEXTO LARGO
+     Una URL o palabra muy larga sin espacios puede desbordar su caja en
+     móvil. overflow-wrap permite partirla solo cuando no cabe. */
+  p,
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  /* 8. REPARTO DE LÍNEAS (CSS moderno)
+     - balance: los titulares se reparten en líneas de largo parecido.
+       Evita la palabra suelta en la segunda línea.
+     - pretty: en párrafos, evita que la última línea tenga una sola
+       palabra ("viuda" tipográfica).
+     Es mejora progresiva: si el navegador no lo entiende, lo ignora y no
+     pasa nada. */
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* 9. LISTAS SIN VIÑETAS
+     Solo quitamos viñetas si la lista tiene role="list" en el HTML:
+     <ul role="list" class="menu">
+     Por qué: Safari deja de anunciar como "lista" (a lectores de pantalla)
+     las listas sin viñetas. Poner role="list" devuelve esa información.
+     Así el reset obliga a hacerlo bien: sin el role, la viñeta se queda. */
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* 10. ENLACES SIN CLASE
+     Enlaces dentro de un texto normal (sin clase propia):
+     - El subrayado "salta" las letras con descendente (g, p, y) para
+       leerse mejor.
+     - Toman el color del texto que los rodea. */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+  /* 11. ANCLAS Y NAVEGACIÓN FIJA
+     Al pulsar un enlace interno (#carta), el navegador lleva la sección
+     arriba del todo... y queda tapada por la navegación fija (sticky).
+     scroll-margin deja un margen por encima al llegar. */
+  :target {
+    scroll-margin-block: 5ex;
+  }
+
+  /* 12. ANIMACIONES FLUIDAS HASTA "auto" (CSS moderno)
+     Históricamente no se podía animar de height: 0 a height: auto.
+     interpolate-size lo permite (útil para acordeones y desplegables).
+     Solo se activa si la persona NO ha pedido reducir el movimiento.
+     Mejora progresiva: los navegadores que no lo soportan lo ignoran. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      interpolate-size: allow-keywords;
+    }
+  }
+
+  /* 13. MOVIMIENTO REDUCIDO (accesibilidad)
+     Hay personas a las que las animaciones les provocan mareo o
+     distracción, y lo configuran en su sistema operativo. Respetamos esa
+     preferencia anulando animaciones y transiciones.
+     Se usa 0.01ms y no 0 para que los eventos de JS que esperan el fin de
+     una animación (animationend) sigan disparándose.
+     !important: aquí está justificado, porque la preferencia de la persona
+     usuaria debe ganar a cualquier estilo del sitio. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

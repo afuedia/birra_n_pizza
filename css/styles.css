@@ -1,0 +1,665 @@
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: var(--tamano-texto-md);
+  line-height: var(--interlineado-texto-md);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fuente-titulos);
+  color: var(--color-texto);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: var(--tamano-titulo-xl);
+  line-height: var(--interlineado-titulo-xl);
+  font-weight: var(--peso-negrita);
+  letter-spacing: var(--espacio-letras-titulo);
+}
+
+h2 {
+  font-size: var(--tamano-titulo-lg);
+  line-height: var(--interlineado-titulo-lg);
+  font-weight: var(--peso-negrita);
+  letter-spacing: var(--espacio-letras-titulo);
+}
+
+h3 {
+  font-size: var(--tamano-titulo-md);
+  line-height: var(--interlineado-titulo-md);
+  font-weight: var(--peso-negrita);
+  letter-spacing: var(--espacio-letras-titulo);
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;            
+  justify-content: center;
+  text-decoration: none;
+  font-weight: var(--peso-negrita);
+  min-height: 2.5rem;               
+  padding-inline: var(--espacio-md);   /* 24px a izquierda y derecha */
+  border-radius: var(--radio-md);
+}
+
+@scope (.cabecera) to (.menu > *) {
+  /* :scope = la propia raíz (el <header class="cabecera">).
+     Equivale a escribir .cabecera, pero sin repetir el nombre. */
+  :scope {
+    position: sticky;
+    top: 0;
+    z-index: var(--capa-navegacion);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio-sm);
+    padding: var(--espacio-sm) var(--margen-pagina);
+    background-color: var(--color-fondo);
+    border-bottom: var(--borde-base);
+  }
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  /* Nombres cortos: no hace falta "cabecera__logo".
+     El @scope ya garantiza que solo afecta al logo de la cabecera. */
+  .logo {
+    flex-shrink: 0;                /* El logo no se encoge si falta espacio. Pendiente de poner una @media para que en cierto ancho solo muestre isologo */
+  }
+
+  .logo img {
+    height: 2.5rem;                /* 40px */
+    width: auto;
+  }
+
+  /* Este .acciones NO choca con el .acciones de la portada:
+     cada uno vive en su propio @scope. */
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacio-xs);
+    
+    
+    .boton-icono {
+  background-color: transparent;
+  border: var(--borde-grosor-fuerte) solid var(--color-primario);
+  color: var(--color-primario);          /* El icono hereda este color */
+  min-width: 2.75rem;                    /* 44 × 44px de área táctil */
+  min-height: 2.75rem;
+  padding: 0;                            /* Anula el padding-inline de .boton */
+}
+    .boton-principal {
+      background-color: var(--color-accion);
+      color: var(--color-sobre-accion);
+      transition: background-color var(--transicion-base);
+      min-height: 2.75rem;
+
+  &:hover {
+    background-color: var(--color-accion-hover);
+  }
+}
+    }
+    
+  
+
+  /* ---------- Botón hamburguesa ---------- */
+  .abrir-menu {
+    /* Quitamos el aspecto de botón del navegador */
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+
+    /* Área táctil mínima de 44 × 44px (WCAG), aunque el icono mida 24 */
+    display: grid;
+    place-items: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+
+    color: var(--color-neutro);    /* El SVG hereda este color con currentColor */
+    border-radius: var(--radio-md);
+    transition: color var(--transicion-base);
+
+    /* El anidamiento sigue siendo útil para estados y media queries */
+    &:hover {
+      color: var(--color-primario);
+    }
+
+    &:focus-visible {
+      outline: var(--foco-anillo);
+      outline-offset: var(--foco-separacion);
+    }
+  }
+
+  /* ---------- Menú: solo su COLOCACIÓN ---------- */
+
+  /* Móvil: oculto por defecto */
+  .menu {
+    display: none;
+  }
+
+  /* Cuando el botón tiene aria-expanded="true" (lo cambiará JavaScript),
+     el menú aparece debajo de la cabecera.
+     :has() = "la cabecera que CONTIENE un botón abierto".
+     Así el mismo atributo sirve para la accesibilidad Y para el CSS. */
+  :scope:has(.abrir-menu[aria-expanded="true"]) .menu {
+    display: block;
+    position: absolute;
+    top: 100%;                     /* Justo debajo de la cabecera */
+    left: 0;
+    right: 0;
+    background-color: var(--color-fondo);
+    border-bottom: var(--borde-base);
+    box-shadow: var(--sombra-flotante);
+  }
+
+  /* ---------- Escritorio ---------- */
+  @media (min-width: 1024px) {
+    .menu {
+      display: block;
+      flex: 1;                     /* Ocupa el espacio entre logo y acciones */
+    }
+
+    .abrir-menu {
+      display: none;               /* En escritorio el menú ya está visible */
+    }
+  }
+}
+
+
+@scope (.portada) {
+  :scope{
+    display: flex;
+    justify-content: center;
+  }
+  .contenedor{
+    width: 100%;
+    max-width: var(--ancho-maximo);
+    margin-inline: var(--margen-pagina);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-md)
+  }
+  .acciones{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-xs)
+  }
+  .boton-principal{
+    background-color: var(--color-accion);
+    color: var(--color-sobre-accion);
+    &:hover {
+      background-color: var(--color-accion-hover);
+    }
+  }
+  .boton-secundario{
+    border: var(--borde-grosor-fuerte) solid var(--color-primario);
+  color: var(--color-primario); 
+  &:hover {
+    background-color: var(--color-primario);
+    color: var(--color-sobre-accion);
+  }
+  }
+
+  .datos{
+    width: 100%;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0
+  }
+    .dato {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .destacado {
+      color: var(--color-primario);
+      font-size: var(--tamano-titulo-lg);
+      font-weight: var(--peso-negrita);
+      font-family: var(--fuente-titulos);
+    }
+  
+}
+
+@scope (.informacion) {
+:scope{
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-fondo-alterno);
+    padding-block: var(--espacio-xl);
+  }
+  .contenedor{
+    width: 100%;
+    max-width: var(--ancho-maximo);
+    margin-inline: var(--margen-pagina);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-md)
+  }
+  .ficha{
+    background-color: var(--color-superficie);
+    display: flex;
+    width: 100%;
+    padding: var(--espacio-sm);
+    border-radius: var(--radio-md);
+    gap: var(--espacio-sm);
+  }
+  .textos{
+    text-transform: uppercase;
+  }
+  .destacado{
+    display: block;
+    font-weight: var(--peso-negrita);
+    text-transform: none;
+    text-decoration: none;
+    color: var(--color-texto);
+    &:focus-visible{
+      outline: var(--foco-anillo);
+      outline-offset: var(--foco-separacion);
+    }
+  }
+  
+}
+
+@scope (.pizzas) to (.tarjeta > *) {
+:scope{
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-fondo);
+    padding-block: var(--espacio-xl);
+  }
+  .contenedor{
+    width: 100%;
+    max-width: var(--ancho-maximo);
+    margin-inline: var(--margen-pagina);
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    gap: var(--espacio-md)
+  }
+  .encabezado{
+    width: 100%;
+    
+  }
+  .sobretitulo {
+    text-transform: uppercase;
+    font-weight: var(--peso-negrita);
+    color: var(--color-primario)
+  }
+}
+
+@scope (.tarjeta) {
+  :scope {
+    background-color: var(--color-superficie);
+    display: flex;
+    flex-direction: column;
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-base);
+    overflow: hidden;
+  }
+  .encabezado {
+    font-family: var(--fuente-titulos);
+    display: flex;
+    justify-content: space-between;
+    padding-inline: var(--espacio-sm);
+    padding-top: var(--espacio-sm);
+    padding-bottom: var(--espacio-xs);
+  }
+  
+  .precio{
+    color:var(--color-primario);
+    font-size: var(--tamano-titulo-md);
+  line-height: var(--interlineado-titulo-md);
+  font-weight: var(--peso-negrita);
+  letter-spacing: var(--espacio-letras-titulo);
+  }
+  .ingredientes{
+    padding-inline: var(--espacio-sm);
+    padding-bottom: var(--espacio-xs);
+  }
+
+  .alergenos {
+    border-top: var(--borde-base);
+    margin-inline: var(--espacio-sm);
+    padding-block: var(--espacio-sm);
+    display: flex;
+    align-items: baseline;
+    ul {
+      padding-inline: var(--espacio-xs);
+      list-style: none;
+      display: flex;
+      gap: var(--espacio-xs);
+      li {
+        background-color: var(--color-fondo);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--espacio-lg);
+        aspect-ratio: 1;
+        border: var(--borde-base);
+        border-radius: var(--radio-sm);
+        box-shadow: var(--sombra-base);
+          
+        
+      }
+    }
+
+  }
+  .imagen {
+    order: -1;
+    max-width: 100%;
+  }
+}
+
+@scope (.cervezas) {
+:scope{
+  background-color: var(--color-fondo-alterno);
+  padding-block: var(--espacio-xl);
+  display: flex;
+  justify-content: center;
+
+}
+
+.encabezado{
+    width: 100%;
+    
+  }
+  .encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-2xs);
+  }
+
+  .sobretitulo {
+    text-transform: uppercase;
+    font-family: var(--fuente-titulos);
+    font-weight: var(--peso-negrita);
+    background-color: var(--color-etiqueta-ambar-fondo);
+    color: var(--color-etiqueta-ambar-texto);
+    font-size: var(--tamano-texto-sm);
+    border: var(--borde-grosor-fuerte) solid var(--color-etiqueta-ambar-texto);
+    width: fit-content;
+    padding-inline: var(--espacio-xs);
+    padding-block: var(--espacio-2xs);
+    border-radius: var(--radio-sm);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    line-height: var(--interlineado-etiqueta);
+  }
+  
+  .pizarra {
+    background-color: var(--color-superficie);
+    width: 100%;
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-base);
+    
+  }
+  .cerveza {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--espacio-sm);
+    border: var(--borde-base);
+  }
+  .nombre {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-xs)
+  }
+  .numero {
+    font-size: var(--tamano-texto-md);
+    font-weight: var(--peso-negrita);
+    display: inline-flex;
+    width: var(--espacio-md);
+    height: var(--espacio-md);
+    color: var(--color-sobre-accion);
+    background-color: var(--color-primario-intenso);
+    border-radius: var(--radio-completo);
+    align-items: center;
+    justify-content: center;
+
+
+  }
+  .precio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fuente-titulos);
+    font-weight: var(--peso-negrita);
+  }
+}
+
+@scope (.filosofia) to (.bloque > *) {
+
+  :scope {
+    padding-block: var(--espacio-2xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .encabezado {
+    
+    gap: var(--espacio-2xs);
+  }
+
+  .titulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);   /* Rojo que cumple con texto pequeño */
+  }
+
+  .subtitulo {
+    
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-titulo-sm);
+    line-height: var(--interlineado-titulo-sm);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-titulo);
+    text-transform: uppercase;
+  }
+}
+
+
+@scope (.bloque) {
+
+  :scope {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+  }
+
+  .imagen {
+    order: -1;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+  }
+
+  .encabezado {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
+
+  .titulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);
+  }
+
+ .subtitulo {
+    
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-titulo-xs);
+    line-height: var(--interlineado-titulo-xs);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-titulo);
+    text-transform: uppercase;
+  }
+
+  .explicacion {
+    color: var(--color-texto-suave);
+  }
+
+  .nota {
+    font-size: var(--tamano-texto-sm);
+    line-height: var(--interlineado-texto-sm);
+    font-weight: var(--peso-negrita);
+  }
+}
+
+@scope (.ambiente) {
+  :scope{
+    background-color: var(--color-fondo-alterno);
+    padding-block: var(--espacio-2xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .titulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);
+  }
+    .subtitulo {
+      font-family: var(--fuente-titulos);
+    font-size: var(--tamano-titulo-sm);
+    line-height: var(--interlineado-titulo-sm);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-titulo);
+    text-transform: uppercase;
+  }
+  .imagenes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espacio-sm);
+  }
+  .imagen {
+    border-radius: var(--radio-sm);
+    border: var(--borde-base);
+    box-shadow: var(--sombra-base);
+  }
+}
+
+@scope (.pie) {
+
+  :scope {
+    color: var(--color-texto-invertido);
+    background-color: var(--color-fondo-invertido);
+    display: flex;
+    justify-content: center;
+    padding-block: var(--espacio-xl);
+    border-top: var(--borde-grosor-acento) solid var(--color-primario);
+    text-align: center;
+  }
+
+  /* El reset pone las imágenes en display: block,
+     y text-align solo centra contenido en línea */
+  .logotipo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .descripcion {
+    color: var(--color-texto-invertido-suave);
+  }
+
+  .enlaces, .redes, .enlaces-legales {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+  }
+
+  /* Área táctil mínima de 44 × 44px */
+  .redes a {
+    display: grid;
+    place-items: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    background-color: var(--color-superficie-invertida);
+    border-radius: var(--radio-sm);
+    text-decoration: none;
+  }
+
+  .aviso {
+    background-color: var(--color-superficie-invertida);
+    border: var(--borde-grosor) solid var(--color-borde-invertido);
+    border-radius: var(--radio-sm);
+    padding: var(--espacio-sm);
+    text-align: left;
+    font-size: var(--tamano-texto-sm);
+    line-height: var(--interlineado-texto-sm);
+
+    strong {
+      display: block;
+    }
+  }
+
+  .legal {
+    display: grid;
+    gap: var(--espacio-xs);
+    padding-top: var(--espacio-sm);
+    border-top: var(--borde-grosor) solid var(--color-borde-invertido);
+    color: var(--color-texto-invertido-suave);
+    font-size: var(--tamano-texto-sm);
+    line-height: var(--interlineado-texto-sm);
+  }
+}
+
+
+
+
+/* Utilidades */
+/* CONTENEDOR */
+/* Un content-max para acotar el ancho del contenido */
+.contenedor {
+    width: 100%;
+    max-width: var(--ancho-maximo);
+    margin-inline: var(--margen-pagina);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-md)
+}
+
+/* SOLO LECTORES
+   Oculta un texto a la vista, pero lo mantiene para los lectores de pantalla. */
+.solo-lectores {
+  position: absolute;     /* Lo saca del flujo: no ocupa espacio en el diseño */
+  width: 1px;             /* 1px y no 0: algunos lectores ignoran los
+                             elementos de tamaño cero */
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;       /* Lo que no cabe en 1px no se ve */
+  clip-path: inset(50%); /* Recorta la caja hasta dejarla sin área visible */
+  white-space: nowrap;    /* Evita que el texto se parta en varias líneas y
+                             algunos lectores lo lean palabra por palabra */
+  border: 0;
+}

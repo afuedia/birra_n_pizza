@@ -1,0 +1,247 @@
+/* ==========================================================================
+   TOKENS DE DISEÑO — Birra N Pizza
+   --------------------------------------------------------------------------
+   Este archivo solo contiene variables (custom properties). No aplica estilos
+   a ningún elemento: es el "diccionario" del sistema de diseño.
+
+   Por qué un archivo aparte:
+   - Si mañana cambia el rojo de la marca, se cambia AQUÍ y en ningún sitio más.
+   - Separa las DECISIONES de diseño (qué valores usamos) de su APLICACIÓN
+     (dónde los usamos), que irá en styles.css.
+
+   Por qué en :root:
+   - :root es el elemento raíz del documento (<html>). Las variables definidas
+     aquí se heredan en toda la página y cualquier regla puede usarlas.
+
+   Convención de nombres:
+   - En español, sin tildes ni ñ (igual que archivos y clases).
+     Por eso "tamano" y no "tamaño".
+   - Los nombres describen la FUNCIÓN, no el aspecto: --color-primario y no
+     --rojo-tomate. Si la marca cambia a verde, el nombre sigue siendo válido.
+   - Formato: --categoría-rol-variante  (ej.: --color-texto-suave)
+   - Las variantes de tamaño usan las tallas de ropa (xs, sm, md, lg, xl):
+     son internacionales y se entienden sin traducir.
+
+   Enfoque mobile-first:
+   - Los valores base son los de móvil. Los @media del final REDEFINEN
+     algunas variables para pantallas más grandes.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. COLORES
+     Cada color indica en qué contexto se puede usar como TEXTO. WCAG AA exige:
+       - 4,5:1 de contraste para texto normal
+       - 3:1 para texto grande (≥ 24px, o ≥ 18,66px en negrita) y para
+         elementos no textuales (bordes, iconos, anillos de foco)
+     Contrastes medidos sobre --color-fondo.
+     ------------------------------------------------------------------------ */
+
+  /* Fondos y superficies */
+  --color-fondo: #F9F6F0;       /* Fondo general: tono "papel de panadería" */
+  --color-fondo-alterno: #F1EBE2;   /* Crema algo más oscuro para alternar secciones.*/
+  --color-superficie: #FFFFFF;  /* Tarjetas, inputs y paneles: se separan del fondo */
+  --color-fondo-invertido: #1C1917;   /* Fondo oscuro (footer). Con el crema ≈ 16:1 ✅ */
+  --color-superficie-invertida: color-mix(in srgb, var(--color-fondo-invertido), white 5%);
+
+
+  /* Texto */
+  --color-texto: #2A1614;       /* Texto principal */
+  --color-texto-suave: #57534E; /* Texto secundario (metadatos, ayudas). ≈ 7:1 ✅ */
+  --color-texto-invertido: #F9F6F0;   /* Texto sobre el fondo invertido */
+  --color-texto-invertido-suave: color-mix(in srgb, var(--color-texto-invertido), var(--color-fondo-invertido) 35%);
+/* Texto secundario sobre el fondo invertido. ≈ 8:1 ✅ */
+
+  /* Marca */
+  --color-primario: #EA1D14;          /* Rojo tomate. → solo texto grande,
+                                         bordes, iconos y anillo de foco. */
+  --color-primario-intenso: #BC0003;  /* Rojo oscuro para TEXTO rojo de tamaño
+                                         normal (enlaces). */
+  --color-secundario: #D04839;        /* Ladrillo. Mismo uso que el primario:
+                                         acentos y texto grande. */
+
+  /* Acción: botones principales (reservar, comprar) */
+  --color-accion: #0063EC;        /* Con texto blanco ≈ 5,3:1 ✅ */
+  --color-accion-hover: #004FB3;  /* "hover" se mantiene: es el nombre de la
+                                     pseudoclase :hover de CSS */
+  --color-sobre-accion: #FFFFFF;  /* Color del contenido que va ENCIMA
+                                     del color de acción (texto del botón) */
+
+  /* Neutros estructurales */
+  --color-neutro: #8D706C;   /* Solo bordes e iconos, NO texto normal */
+  --color-borde: #E7E2D7;    /* Líneas finas de separación. Es decorativo:
+                                no transmite información, por eso puede tener
+                                poco contraste. */
+   --color-borde-invertido: color-mix(in srgb, var(--color-fondo-invertido), white 10%);
+
+  /* Estados y etiquetas (cada fondo va con su texto) */
+  --color-error: #BA1A1A;
+  --color-etiqueta-ambar-fondo: #FEF3C7;
+  --color-etiqueta-ambar-texto: #92400E;
+  --color-etiqueta-roja-fondo: #FEE2E2;
+  --color-etiqueta-roja-texto: #991B1B;
+
+  /* ------------------------------------------------------------------------
+     2. TIPOGRAFÍA
+     ------------------------------------------------------------------------ */
+
+  /* Familias con respaldo. */
+  --fuente-titulos: 'Oswald', 'Arial Narrow', sans-serif;  /* Titulares y etiquetas */
+  --fuente-texto: 'Source Sans 3', system-ui, sans-serif;  /* Texto de lectura */
+
+  /* Pesos: nombres en lugar de números para saber qué representa cada uno */
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-seminegrita: 600;
+  --peso-negrita: 700;
+
+  
+  /* RITMO VERTICAL
+     El interlineado (line-height) es múltiplo de 4px (0.25rem), así el texto
+     encaja en la misma rejilla que el espaciado (múltiplos de 8px).
+     Excepción a una buena práctica: normalmente se recomienda line-height sin
+     unidades (1.5) para que se herede de forma proporcional. Aquí usamos rem
+     porque cada interlineado va unido a un tamaño concreto y necesitamos
+     valores exactos para cuadrar la rejilla. */
+
+  /* Titulares (valores móvil; se amplían en el @media del final) */
+  --tamano-titulo-xl: 2.25rem;        /* 36px */
+  --interlineado-titulo-xl: 2.75rem;  /* 44px */
+  --tamano-titulo-lg: 1.75rem;        /* 28px */
+  --interlineado-titulo-lg: 2.25rem;  /* 36px */
+  --tamano-titulo-md: 1.5rem;         /* 24px */
+  --interlineado-titulo-md: 2rem;     /* 32px */
+  --tamano-titulo-sm: 1.25rem;        /* 20px */
+  --interlineado-titulo-sm: 1.75rem;  /* 28px */
+
+  /* Texto de lectura */
+  --tamano-texto-lg: 1.125rem;        /* 18px */
+  --interlineado-texto-lg: 1.75rem;   /* 28px */
+  --tamano-texto-md: 1rem;            /* 16px */
+  --interlineado-texto-md: 1.5rem;    /* 24px */
+  --tamano-texto-sm: 0.875rem;        /* 14px */
+  --interlineado-texto-sm: 1.25rem;   /* 20px */
+
+  /* Etiquetas (botones, badges). Interlineado fijo de 16px para que
+     botón = 16px de texto + 12px + 12px de padding = 40px, múltiplo de 8. */
+  --tamano-etiqueta-lg: 1rem;         /* 16px */
+  --tamano-etiqueta-md: 0.875rem;     /* 14px */
+  --tamano-etiqueta-sm: 0.75rem;      /* 12px */
+  --interlineado-etiqueta: 1rem;      /* 16px */
+
+  /* Espacio entre letras (letter-spacing): en em para que sea proporcional
+     al tamaño. Las fuentes condensadas en mayúsculas necesitan "aire" para
+     leerse bien. */
+  --espacio-letras-titulo: 0.02em;
+  --espacio-letras-titulo-ajustado: 0.01em;
+  --espacio-letras-etiqueta: 0.05em;
+
+  /* ------------------------------------------------------------------------
+     3. ESPACIADO
+     Escala de 8px: todos los márgenes y paddings salen de aquí.
+     Usar SOLO estos valores evita los "13px por aquí, 17px por allá" y da
+     coherencia visual sin tener que pensarlo en cada componente.
+     ------------------------------------------------------------------------ */
+  --espacio-2xs: 0.25rem;  /*  4px — medio paso, solo para detalles finos (etiquetas) */
+  --espacio-xs: 0.5rem;    /*  8px */
+  --espacio-sm: 1rem;      /* 16px */
+  --espacio-md: 1.5rem;    /* 24px */
+  --espacio-lg: 2rem;      /* 32px */
+  --espacio-xl: 3rem;      /* 48px — entre bloques relacionados */
+  --espacio-2xl: 4rem;     /* 64px — entre secciones distintas */
+
+  /* ------------------------------------------------------------------------
+     4. MAQUETACIÓN
+     ------------------------------------------------------------------------ */
+  --ancho-maximo: 1200px;         /* Ancho máximo del contenido en escritorio */
+  --separacion-columnas: 1rem;    /* Hueco entre columnas (móvil) */
+  --margen-pagina: 1rem;          /* Margen lateral de la página (móvil) */
+
+  /* ------------------------------------------------------------------------
+     5. BORDES Y RADIOS
+     ------------------------------------------------------------------------ */
+  --borde-grosor: 1px;
+  --borde-grosor-fuerte: 1.5px;  /* Botón secundario, casillas de verificación */
+  --borde-grosor-acento: 0.25rem;
+  --borde-base: var(--borde-grosor) solid var(--color-borde);
+
+  /* ↑ Un token puede construirse con otros tokens. */
+
+  --radio-sm: 0.25rem;       /* 4px — etiquetas, inputs */
+  --radio-md: 0.5rem;        /* 8px — botones, tarjetas, imágenes */
+  --radio-completo: 9999px;  /* Píldora. Solo para contadores e iconos de dieta */
+
+  /* ------------------------------------------------------------------------
+     6. PROFUNDIDAD
+     El sistema es plano: una sola sombra para elementos flotantes
+     (menú desplegable, navegación fija). Un único token evita que cada
+     componente acabe con una sombra distinta.
+     ------------------------------------------------------------------------ */
+  --sombra-base: 0 1px 2px rgba(0, 0, 0, 0.05);  /* Casi imperceptible: separa del fondo
+                                                  sin romper la estética plana.
+                                                  Tarjetas de pizza y de opiniones,
+                                                  bloque de cervezas, formulario de
+                                                  reserva, recuadro del mapa, cabecera
+                                                  y botones principales. */
+  
+     --sombra-flotante: 0 4px 12px rgba(141, 112, 108, 0.08); /* Para elementos que quedan POR
+                                                              ENCIMA del contenido: menú
+                                                              desplegable del móvil y
+                                                              cualquier panel que se superponga
+                                                              a la página. No usar en elementos
+                                                              que forman parte del flujo
+                                                              (para eso, --sombra-base). */
+
+  --capa-navegacion: 100;  /* z-index de la navegación fija. Centralizar los
+                              z-index evita la "guerra del 9999". */
+
+  /* ------------------------------------------------------------------------
+     7. INTERACCIÓN
+     ------------------------------------------------------------------------ */
+  --transicion-base: 200ms ease;  /* Todos los hover se comportan igual */
+
+  /* Anillo de foco: indica a quien navega con teclado dónde está.
+     NUNCA se elimina (outline: none) sin poner otro indicador visible. */
+  --foco-anillo: 2px solid var(--color-primario);
+  --foco-separacion: 1px;
+}
+
+/* ==========================================================================
+   PUNTOS DE CORTE (breakpoints)
+   --------------------------------------------------------------------------
+   Móvil:      < 640px
+   Tablet:     640px – 1023px
+   Escritorio: ≥ 1024px
+
+   ⚠️ Los puntos de corte NO pueden ser variables CSS:
+      @media (min-width: var(--corte-tablet))  → NO funciona
+   Las media queries se evalúan antes de que existan las variables, por eso
+   los valores se escriben a mano y quedan documentados aquí.
+
+   Lo que SÍ se puede hacer es REDEFINIR variables dentro de un @media.
+   Así no hace falta crear tokens "-movil": la misma variable cambia de
+   valor según la pantalla y todos los componentes que la usan se adaptan
+   solos.
+   ========================================================================== */
+
+/* Tablet en adelante: más aire lateral */
+@media (min-width: 640px) {
+  :root {
+    --separacion-columnas: 1.5rem;  /* 24px */
+    --margen-pagina: 2rem;          /* 32px */
+  }
+}
+
+/* Escritorio: titulares a tamaño completo.
+   Decisión: se amplían a partir de 1024px y no de 640px porque en tablet
+   vertical 56px sigue siendo demasiado grande para el ancho disponible. */
+@media (min-width: 1024px) {
+  :root {
+    --tamano-titulo-xl: 3.5rem;         /* 56px */
+    --interlineado-titulo-xl: 4rem;     /* 64px */
+    --tamano-titulo-lg: 2.5rem;         /* 40px */
+    --interlineado-titulo-lg: 3rem;     /* 48px */
+    --tamano-titulo-md: 1.75rem;        /* 28px */
+    --interlineado-titulo-md: 2.25rem;  /* 36px */
+  }
+}

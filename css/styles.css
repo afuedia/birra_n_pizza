@@ -173,6 +173,7 @@ h3 {
   :scope{
     display: flex;
     justify-content: center;
+    padding-block: var(--espacio-2xl);
   }
   .contenedor{
     width: 100%;

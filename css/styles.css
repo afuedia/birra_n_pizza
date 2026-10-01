@@ -386,10 +386,10 @@ h3 {
     text-transform: uppercase;
     font-family: var(--fuente-titulos);
     font-weight: var(--peso-negrita);
-    background-color: var(--color-etiqueta-ambar-fondo);
-    color: var(--color-etiqueta-ambar-texto);
+    background-color: var(--color-etiqueta-fondo);
+    color: var(--color-etiqueta-texto);
     font-size: var(--tamano-texto-sm);
-    border: var(--borde-grosor-fuerte) solid var(--color-etiqueta-ambar-texto);
+    border: var(--borde-grosor-fuerte) solid var(--color-etiqueta-texto);
     width: fit-content;
     padding-inline: var(--espacio-xs);
     padding-block: var(--espacio-2xs);

@@ -1,0 +1,158 @@
+/* ==========================================================================
+   PRIMITIVOS — Birra N Pizza
+   --------------------------------------------------------------------------
+   Capa 1 del sistema de diseño (la más baja): la "caja de materiales".
+
+   Qué contiene:
+   - Colores: cuatro rampas de 10 peldaños (neutro, rojo, verde, ámbar) y el blanco.
+   - Medidas: una escala de espaciado/tamaños (múltiplos de 4 px).
+   - Letra: una escala de tamaños de fuente.
+
+   Qué NO hace:
+   - No sabe para qué sirve cada valor. Eso lo decide semanticos.css.
+   - No se usa NUNCA en styles.css ni en los componentes. Solo lo leen los
+     semánticos.
+
+   Cadena de dependencias:
+     primitivos.css  →  semanticos.css  →  styles.css
+     (el valor)         (la función)        (la aplicación)
+
+   Ejemplo:
+     primitivos:  --rojo-60: #da2119;
+     semanticos:  --color-primario: var(--rojo-60);
+     styles:      .boton { background: var(--color-primario); }
+
+   Referencia y adaptación:
+   - La estructura de las rampas (10 peldaños, 10 a 100, con contraste
+     calibrado por peldaño) sigue el modelo de IBM Carbon. Los valores NO son
+     los de Carbon: se anclaron a los colores reales de la marca y se
+     recalcularon (neutro y ámbar, desde cero; rojo y verde, ajustados).
+
+   Convención de nombres:
+   - Los primitivos se nombran por su VALOR (rojo-60, medida-16, letra-18),
+     nunca por su uso. Por eso no llevan el prefijo "color-" ni "espacio-":
+     así, al escribir "--espacio-" o "--color-" el autocompletado solo
+     muestra tokens semánticos y es difícil usar un primitivo por error.
+   - Control de calidad: buscar "--rojo-", "--neutro-", "--medida-"... en
+     styles.css debe dar CERO resultados.
+   ========================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+     REGLA DE CONTRASTE (válida para TODAS las rampas)
+     El contraste con blanco depende solo del peldaño, no del color:
+
+       10–40  →  solo fondos y decoración (< 3:1)
+       50     →  ≥ 3:1   iconos, bordes de control, texto grande
+       60     →  ≥ 4,5:1 texto normal y botones con texto blanco (AA)
+       70     →  ≥ 5,7:1 texto normal con margen
+       80–100 →  ≥ 11:1  texto sobre fondos claros (AAA)
+
+     Así, cambiar rojo-60 por verde-60 nunca rompe la accesibilidad.
+     Los valores entre paréntesis son el contraste medido con blanco.
+     ------------------------------------------------------------------------ */
+
+  --blanco: #FFFFFF;  /* Superficies (tarjetas, inputs) y texto sobre colores de marca */
+
+  /* ------------------------------------------------------------------------
+     NEUTRO CÁLIDO — fondos, textos y bordes
+     ------------------------------------------------------------------------ */
+  --neutro-10: #f7f3f1;    /* (1,1:1) Fondo general (crema) */
+  --neutro-20: #e4e0de;    /* (1,3:1) Bordes, líneas de separación */
+  --neutro-30: #c9c5c3;    /* (1,7:1) Texto suave sobre fondo oscuro */
+  --neutro-40: #aca9a6;    /* (2,3:1) */
+  --neutro-50: #8f8b89;    /* (3,4:1) Iconos y bordes de control (≥ 3:1) */
+  --neutro-60: #736f6d;    /* (5,0:1) */
+  --neutro-70: #66625f;    /* (6,0:1) Texto suave (≈ 5,6:1 sobre neutro-10) */
+  --neutro-80: #3c3836;    /* (11,6:1) Borde sobre fondo oscuro */
+  --neutro-90: #272524;    /* (15,3:1) Texto principal / superficie sobre fondo oscuro */
+  --neutro-100: #1c1917;   /* (17,5:1) Fondo oscuro (pie de página) */
+
+  /* ------------------------------------------------------------------------
+     ROJO — marca, acción y avisos
+     ------------------------------------------------------------------------ */
+  --rojo-10: #fff1ef;      /* (1,1:1) Fondo de etiqueta de aviso */
+  --rojo-20: #ffd8d2;      /* (1,3:1) */
+  --rojo-30: #ffb5aa;      /* (1,7:1) */
+  --rojo-40: #ff8676;      /* (2,4:1) */
+  --rojo-50: #fa5041;      /* (3,3:1) Solo iconos y texto grande */
+  --rojo-60: #da2119;      /* (5,0:1) MARCA: botón principal, foco, acentos */
+  --rojo-70: #bc0003;      /* (6,7:1) Hover del botón, enlaces, errores, texto de aviso */
+  --rojo-80: #750f0b;      /* (11,5:1) */
+  --rojo-90: #520503;      /* (15,2:1) */
+  --rojo-100: #2d0805;     /* (18,3:1) */
+
+  /* ------------------------------------------------------------------------
+     VERDE — confirmaciones y estados positivos
+     ------------------------------------------------------------------------ */
+  --verde-10: #e1fae3;     /* (1,1:1) Fondo de mensaje de éxito */
+  --verde-20: #acefb5;     /* (1,3:1) */
+  --verde-30: #75db88;     /* (1,7:1) */
+  --verde-40: #47be62;     /* (2,4:1) */
+  --verde-50: #24a148;     /* (3,4:1) */
+  --verde-60: #1a8038;     /* (5,0:1) Éxito, 'disponible', dieta vegetariana */
+  --verde-70: #29753b;     /* (5,7:1) Texto de éxito */
+  --verde-80: #034317;     /* (11,5:1) */
+  --verde-90: #012d0d;     /* (15,2:1) */
+  --verde-100: #061909;    /* (18,2:1) */
+
+  /* ------------------------------------------------------------------------
+     ÁMBAR — etiquetas y detalles destacados
+     ------------------------------------------------------------------------ */
+  --ambar-10: #fff4cc;     /* (1,1:1) Fondo de etiqueta */
+  --ambar-20: #f7e19c;     /* (1,3:1) */
+  --ambar-30: #ebc166;     /* (1,7:1) Borde de etiqueta */
+  --ambar-40: #e19d1c;     /* (2,3:1) Estrellas de valoración */
+  --ambar-50: #c47b07;     /* (3,4:1) */
+  --ambar-60: #a95b00;     /* (5,0:1) */
+  --ambar-70: #9d4c18;     /* (6,0:1) Texto de etiqueta */
+  --ambar-80: #60290d;     /* (11,5:1) */
+  --ambar-90: #3e1b0d;     /* (15,4:1) */
+  --ambar-100: #28150e;    /* (17,4:1) */
+
+  /* ------------------------------------------------------------------------
+     MEDIDAS — espaciado, tamaños, radios y alturas de línea
+     Una sola escala, múltiplos de 4 px, con pasos más largos al crecer.
+     El número del nombre son los píxeles de referencia; el valor va en rem
+     (1rem = 16 px por defecto) para que escale con la configuración de la
+     persona usuaria.
+     Las alturas de línea (16, 20, 24, 28, 32...) reutilizan esta misma
+     escala: todo encaja en la rejilla de 4 px.
+     ------------------------------------------------------------------------ */
+  --medida-0: 0rem;
+  --medida-4: 0.25rem;       /* Detalles finos (etiquetas), radio pequeño */
+  --medida-8: 0.5rem;        /* Radio de botones y tarjetas */
+  --medida-12: 0.75rem;
+  --medida-16: 1rem;         /* Margen de página en móvil */
+  --medida-20: 1.25rem;
+  --medida-24: 1.5rem;       /* Altura de línea de texto */
+  --medida-28: 1.75rem;
+  --medida-32: 2rem;         /* Margen de página desde tablet */
+  --medida-36: 2.25rem;
+  --medida-40: 2.5rem;
+  --medida-44: 2.75rem;      /* Tamaño táctil mínimo (botones, enlaces de menú) */
+  --medida-48: 3rem;
+  --medida-56: 3.5rem;
+  --medida-64: 4rem;         /* Separación entre secciones */
+  --medida-80: 5rem;
+  --medida-96: 6rem;
+  --medida-112: 7rem;
+  --medida-128: 8rem;
+
+  /* ------------------------------------------------------------------------
+     LETRA — tamaños de fuente
+     Escala propia: los tamaños de texto no encajan en la rejilla de 4 px.
+     Solo están los que se usan; no se rellena la escala "por si acaso".
+     ------------------------------------------------------------------------ */
+  --letra-12: 0.75rem;       /* Etiquetas pequeñas */
+  --letra-14: 0.875rem;      /* Texto pequeño */
+  --letra-16: 1rem;          /* Texto base (mínimo en formularios, evita el zoom en iOS) */
+  --letra-18: 1.125rem;      /* Texto destacado */
+  --letra-20: 1.25rem;       /* Titular pequeño (móvil) */
+  --letra-24: 1.5rem;
+  --letra-28: 1.75rem;
+  --letra-36: 2.25rem;
+  --letra-40: 2.5rem;
+  --letra-56: 3.5rem;        /* Titular grande (escritorio) */
+}

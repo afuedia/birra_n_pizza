@@ -1,0 +1,249 @@
+/* ==========================================================================
+   SEMÁNTICOS — Birra N Pizza
+   --------------------------------------------------------------------------
+   Capa 2 del sistema de diseño. Sustituye al antiguo tokens.css.
+
+   Qué hace:
+   - Da FUNCIÓN a los valores de primitivos.css. Un primitivo dice "qué es"
+     (rojo-60); un semántico dice "para qué sirve" (--color-primario).
+   - Es la ÚNICA capa que styles.css puede leer.
+   - Es donde se redefinen valores según la pantalla (@media al final).
+
+   Cadena de dependencias:
+     primitivos.css  →  semanticos.css  →  styles.css
+
+   Por qué dos capas:
+   - Cambiar el rojo de la marca = cambiar UNA línea aquí
+     (--color-primario: var(--rojo-60) → var(--verde-60)).
+   - Un modo oscuro, o una segunda marca, solo reescribe este archivo.
+   - Los componentes no se enteran de nada.
+
+   Convención de nombres:
+   - En español, sin tildes ni ñ ("tamano", no "tamaño").
+   - Describen la FUNCIÓN, no el aspecto: --color-primario, no --color-rojo.
+   - Formato: --categoría-rol-variante  (ej.: --color-texto-suave)
+   - "sobre-" indica el color del contenido que va ENCIMA de otro color.
+   - Tallas de ropa (2xs, xs, sm, md, lg, xl, 2xl) para las variantes.
+
+   Orden de carga en el HTML:
+     reset.css → fonts.css → primitivos.css → semanticos.css → styles.css
+   ========================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+     1. COLORES
+     Contrastes medidos (WCAG AA: 4,5:1 texto normal; 3:1 texto grande,
+     iconos, bordes de control y anillo de foco).
+     ------------------------------------------------------------------------ */
+
+  /* Fondos y superficies */
+  --color-fondo: var(--neutro-10);          /* Fondo general: "papel de panadería" */
+  --color-fondo-alterno: color-mix(in srgb, var(--neutro-10), var(--neutro-20) 50%);
+                                            /* Secciones intercaladas. No existe un
+                                               peldaño intermedio, se mezcla. */
+  --color-superficie: var(--blanco);        /* Tarjetas, inputs y paneles */
+
+  /* Texto */
+  --color-texto: var(--neutro-90);          /* Principal. 13,8:1 sobre fondo ✅ */
+  --color-texto-suave: var(--neutro-70);    /* Metadatos y ayudas. 5,5:1 sobre fondo ✅ */
+
+  /* Marca y acción
+     El mismo rojo hace de marca y de botón: un único color principal. */
+  --color-primario: var(--rojo-60);         /* Marca, botón principal, foco.
+                                               4,5:1 sobre fondo ✅ (justo)
+                                               5,0:1 con texto blanco ✅ */
+  --color-primario-intenso: var(--rojo-70); /* Enlaces y texto rojo. 6,1:1 ✅ */
+  --color-accion: var(--rojo-60);           /* Botón principal (reservar, comprar) */
+  --color-accion-hover: var(--rojo-70);     /* "hover" se mantiene: es la pseudoclase */
+  --color-sobre-accion: var(--blanco);      /* Texto del botón. 5,0:1 ✅ */
+  --color-sobre-primario: var(--blanco);    /* Texto sobre fondos de marca */
+
+  /* Neutros estructurales */
+  --color-neutro: var(--neutro-50);         /* Bordes de control e iconos (3,1:1 ✅).
+                                               NO para texto normal. */
+  --color-borde: var(--neutro-20);          /* Líneas finas de separación. Decorativo:
+                                               no transmite información, por eso
+                                               puede tener poco contraste (1,2:1). */
+
+  /* Estados */
+  --color-error: var(--rojo-70);            /* Mensajes de error. 6,1:1 ✅
+                                               Es casi el color de marca: acompáñalo
+                                               SIEMPRE de un icono o texto, nunca
+                                               solo de color. */
+  --color-exito: var(--verde-60);           /* Iconos de éxito, "disponible" */
+  --color-exito-fondo: var(--verde-10);     /* Fondo del mensaje de éxito */
+  --color-exito-texto: var(--verde-70);     /* Texto del mensaje. 5,1:1 ✅ */
+
+  /* Etiquetas (cada fondo va con su texto) */
+  --color-etiqueta-fondo: var(--ambar-10);
+  --color-etiqueta-texto: var(--ambar-70);  /* 5,5:1 sobre su fondo ✅ */
+  --color-etiqueta-borde: var(--ambar-30);
+  --color-etiqueta-aviso-fondo: var(--rojo-10);
+  --color-etiqueta-aviso-texto: var(--rojo-70); /* 6,1:1 sobre su fondo ✅ */
+
+  /* Zonas oscuras (pie de página)
+     Cada color de aquí se usa SOBRE --color-fondo-invertido. */
+  --color-fondo-invertido: var(--neutro-100);
+  --color-superficie-invertida: var(--neutro-90);   /* Tarjetas dentro del pie */
+  --color-borde-invertido: var(--neutro-80);
+  --color-texto-invertido: var(--neutro-10);        /* 15,9:1 ✅ */
+  --color-texto-invertido-suave: var(--neutro-30);  /* 10,2:1 ✅ */
+
+  /* ------------------------------------------------------------------------
+     2. TIPOGRAFÍA
+     ------------------------------------------------------------------------ */
+
+  /* Familias: siempre con alternativas por si la fuente no carga. */
+  --fuente-titulos: 'Oswald', 'Arial Narrow', sans-serif;  /* Titulares y etiquetas */
+  --fuente-texto: 'Source Sans 3', system-ui, sans-serif;  /* Texto de lectura */
+
+  /* Pesos: nombres en lugar de números */
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-seminegrita: 600;
+  --peso-negrita: 700;
+
+  /* RITMO VERTICAL
+     Todos los interlineados son múltiplos de 4 px (--medida-*), igual que el
+     espaciado: el texto encaja en la misma rejilla.
+     Excepción a una buena práctica: normalmente se recomienda line-height sin
+     unidades (1.5) para que se herede de forma proporcional. Aquí usamos
+     medidas fijas porque cada interlineado va unido a un tamaño concreto y
+     necesitamos valores exactos para cuadrar la rejilla. */
+
+  /* Titulares (valores móvil; se amplían en el @media del final) */
+  --tamano-titulo-xl: var(--letra-36);
+  --interlineado-titulo-xl: var(--medida-44);
+  --tamano-titulo-lg: var(--letra-28);
+  --interlineado-titulo-lg: var(--medida-36);
+  --tamano-titulo-md: var(--letra-24);
+  --interlineado-titulo-md: var(--medida-32);
+  --tamano-titulo-sm: var(--letra-20);
+  --interlineado-titulo-sm: var(--medida-28);
+
+  /* Texto de lectura */
+  --tamano-texto-lg: var(--letra-18);
+  --interlineado-texto-lg: var(--medida-28);
+  --tamano-texto-md: var(--letra-16);   /* Mínimo en formularios (evita zoom en iOS) */
+  --interlineado-texto-md: var(--medida-24);
+  --tamano-texto-sm: var(--letra-14);
+  --interlineado-texto-sm: var(--medida-20);
+
+  /* Etiquetas (botones, badges). Interlineado fijo de 16 px para que
+     botón = 16 de texto + 12 + 12 de padding = 40 px, múltiplo de 8. */
+  --tamano-etiqueta-lg: var(--letra-16);
+  --tamano-etiqueta-md: var(--letra-14);
+  --tamano-etiqueta-sm: var(--letra-12);
+  --interlineado-etiqueta: var(--medida-16);
+
+  /* Espacio entre letras: en em para que sea proporcional al tamaño.
+     (No tienen primitivo: son proporciones, no medidas.) */
+  --espacio-letras-titulo: 0.02em;
+  --espacio-letras-titulo-ajustado: 0.01em;
+  --espacio-letras-etiqueta: 0.05em;
+
+  /* ------------------------------------------------------------------------
+     3. ESPACIADO
+     Escala de 8 px (con 4 px como medio paso). Todos los márgenes y
+     paddings salen de aquí.
+     ------------------------------------------------------------------------ */
+  --espacio-2xs: var(--medida-4);   /* Medio paso: detalles finos (etiquetas) */
+  --espacio-xs: var(--medida-8);
+  --espacio-sm: var(--medida-16);
+  --espacio-md: var(--medida-24);
+  --espacio-lg: var(--medida-32);
+  --espacio-xl: var(--medida-48);   /* Entre bloques relacionados */
+  --espacio-2xl: var(--medida-64);  /* Entre secciones distintas */
+
+  --tamano-tactil-minimo: var(--medida-44);  /* Alto mínimo de botones y enlaces
+                                                pulsables (WCAG 2.5.5 / Apple) */
+
+  /* ------------------------------------------------------------------------
+     4. MAQUETACIÓN
+     ------------------------------------------------------------------------ */
+  --ancho-maximo: 1200px;                       /* Contenido en escritorio */
+  --separacion-columnas: var(--medida-16);      /* Hueco entre columnas (móvil) */
+  --margen-pagina: var(--medida-16);            /* Margen lateral (móvil) */
+
+  /* ------------------------------------------------------------------------
+     5. BORDES Y RADIOS
+     ------------------------------------------------------------------------ */
+  --borde-grosor: 1px;
+  --borde-grosor-fuerte: 1.5px;  /* Botón secundario, casillas de verificación */
+  --borde-grosor-acento: var(--medida-4);  /* Línea de acento (citas, destacados) */
+  --borde-base: var(--borde-grosor) solid var(--color-borde);
+  /* ↑ Un token puede construirse con otros tokens. */
+
+  --radio-sm: var(--medida-4);   /* Etiquetas, inputs */
+  --radio-md: var(--medida-8);   /* Botones, tarjetas, imágenes */
+  --radio-completo: 9999px;      /* Píldora: contadores e iconos de dieta */
+
+  /* ------------------------------------------------------------------------
+     6. PROFUNDIDAD
+     Dos sombras. Un token por función evita que cada componente acabe
+     con una sombra distinta.
+     Se mezclan con color-mix() porque una sombra con transparencia sobre un
+     fondo cálido queda mejor que un negro puro.
+     ------------------------------------------------------------------------ */
+  --sombra-base: 0 1px 2px color-mix(in srgb, var(--neutro-100) 5%, transparent);
+                                                /* Tarjetas, botones: reposo */
+  --sombra-flotante: 0 var(--medida-4) var(--medida-12)
+                     color-mix(in srgb, var(--neutro-100) 8%, transparent);
+                                                /* Menú desplegable, navegación fija */
+
+  --capa-navegacion: 100;  /* z-index de la navegación fija. Centralizar los
+                              z-index evita la "guerra del 9999". */
+
+  /* ------------------------------------------------------------------------
+     7. INTERACCIÓN
+     ------------------------------------------------------------------------ */
+  --transicion-base: 200ms ease;  /* Todos los hover se comportan igual */
+
+  /* Anillo de foco: indica a quien navega con teclado dónde está.
+     NUNCA se elimina (outline: none) sin poner otro indicador visible.
+     Contraste ≥ 3:1 tanto sobre el fondo claro como sobre el pie oscuro. */
+  --foco-anillo: 2px solid var(--color-primario);
+  --foco-separacion: 1px;
+}
+
+/* ==========================================================================
+   PUNTOS DE CORTE (breakpoints)
+   --------------------------------------------------------------------------
+   Móvil:      < 640px
+   Tablet:     640px – 1023px
+   Escritorio: ≥ 1024px
+
+   ⚠️ Los puntos de corte NO pueden ser variables CSS:
+      @media (min-width: var(--corte-tablet))  → NO funciona
+   Las media queries se evalúan antes de que existan las variables, por eso
+   los valores se escriben a mano y quedan documentados aquí.
+
+   Lo que SÍ se puede hacer es REDEFINIR variables dentro de un @media.
+   Así no hace falta crear tokens "-movil": la misma variable cambia de
+   valor según la pantalla y todos los componentes se adaptan solos.
+   Aquí es donde la capa semántica demuestra su valor: se redefine apuntando
+   a OTRO primitivo, sin tocar nada más.
+   ========================================================================== */
+
+/* Tablet en adelante: más aire lateral */
+@media (min-width: 640px) {
+  :root {
+    --separacion-columnas: var(--medida-24);
+    --margen-pagina: var(--medida-32);
+  }
+}
+
+/* Escritorio: titulares a tamaño completo.
+   Decisión: se amplían a partir de 1024px y no de 640px porque en tablet
+   vertical 56px sigue siendo demasiado grande para el ancho disponible. */
+@media (min-width: 1024px) {
+  :root {
+    --tamano-titulo-xl: var(--letra-56);
+    --interlineado-titulo-xl: var(--medida-64);
+    --tamano-titulo-lg: var(--letra-40);
+    --interlineado-titulo-lg: var(--medida-48);
+    --tamano-titulo-md: var(--letra-28);
+    --interlineado-titulo-md: var(--medida-36);
+  }
+}

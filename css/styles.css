@@ -567,6 +567,358 @@ h3 {
   }
 }
 
+
+@scope (.opiniones) to (.opinion > *) {
+
+  :scope {
+    padding-block: var(--espacio-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .contenedor {
+    display: grid;
+    gap: var(--espacio-lg);
+  }
+
+  .encabezado {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
+
+  .sobretitulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);
+  }
+
+  .lista {
+    display: grid;
+    gap: var(--espacio-sm);
+  }
+}
+
+
+@scope (.opinion) {
+
+  :scope {
+    display: grid;
+    gap: var(--espacio-sm);
+    padding: var(--espacio-md);
+    background-color: var(--color-superficie);
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-base);
+  }
+
+  .estrellas {
+    color: var(--color-primario);
+    letter-spacing: var(--espacio-letras-etiqueta);
+  }
+
+  .texto {
+    font-style: italic;
+  }
+
+  figcaption {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
+
+  .autor {
+    font-family: var(--fuente-titulos);
+    font-weight: var(--peso-negrita);
+    text-transform: uppercase;
+    letter-spacing: var(--espacio-letras-titulo);
+  }
+
+  .perfil {
+    font-size: var(--tamano-texto-sm);
+    line-height: var(--interlineado-texto-sm);
+    color: var(--color-texto-suave);
+  }
+}
+
+
+/* ==========================================================================
+   RESERVAS (sección)
+   El formulario tiene su propio @scope. Como la sección no toca la caja del
+   formulario, basta con "to (.formulario)" (sin el "> *" de la cabecera).
+   ========================================================================== */
+@scope (.reservas) to (.formulario) {
+
+  :scope {
+    padding-block: var(--espacio-2xl);
+    background-color: var(--color-fondo-alterno);
+    display: flex;
+    justify-content: center;
+  }
+
+  .contenedor {
+    display: grid;
+    gap: var(--espacio-lg);
+  }
+
+  .encabezado {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
+
+  .sobretitulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);
+  }
+
+  .subtitulo {
+    color: var(--color-texto-suave);
+  }
+
+  .llevar {
+    padding: var(--espacio-sm);
+    background-color: var(--color-superficie);
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+  }
+}
+
+/* ==========================================================================
+   FORMULARIO DE RESERVA
+   ========================================================================== */
+@scope (.formulario) {
+
+  :scope {
+    display: grid;
+    gap: var(--espacio-sm);
+    padding: var(--espacio-md);
+    background-color: var(--color-superficie);
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-base);
+  }
+
+  .nota,
+  .informacion-legal {
+    font-size: var(--tamano-texto-sm);
+    line-height: var(--interlineado-texto-sm);
+    color: var(--color-texto-suave);
+  }
+
+  /* El navegador reduce <small> un 17 % más: sin esto, el texto de 14px
+     acaba en unos 11,7px */
+  small {
+    font-size: inherit;
+  }
+
+  /* ---------- Campos ---------- */
+  .campo {
+    display: grid;
+    gap: var(--espacio-2xs);
+    min-width: 0;                    /* Un hijo de grid no se encoge por debajo de su contenido */
+  }
+
+  /* Fecha y turno en la misma fila.
+     minmax(0, 1fr) y no 1fr: el selector de fecha tiene un ancho mínimo
+     propio y, con 1fr, podría empujar la columna y desbordar en móvil */
+  .fila {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--espacio-sm);
+  }
+
+  label {
+    font-size: var(--tamano-etiqueta-md);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+  }
+
+  input:not([type="checkbox"]),
+  select,
+  textarea {
+    width: 100%;
+    min-height: 2.75rem;             /* 44px de área táctil */
+    padding-inline: var(--espacio-sm);
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+    /* --color-neutro y no --color-borde: el borde de un campo es un
+       elemento interactivo y WCAG (1.4.11) le exige 3:1 de contraste */
+    border: var(--borde-grosor) solid var(--color-neutro);
+    border-radius: var(--radio-sm);
+  }
+
+  textarea {
+    padding-block: var(--espacio-xs);
+    resize: vertical;
+  }
+
+  /* El placeholder por defecto es gris claro, y Firefox le baja además la opacidad */
+  ::placeholder {
+    color: var(--color-texto-suave);
+    opacity: 1;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: var(--foco-anillo);
+    outline-offset: var(--foco-separacion);
+  }
+
+  /* Error: solo después de que la persona haya interactuado con el campo.
+     El color no puede ser la única señal, por eso el borde también engorda */
+  input:user-invalid,
+  select:user-invalid,
+  textarea:user-invalid {
+    border-color: var(--color-error);
+    border-width: var(--borde-grosor-fuerte);
+  }
+
+  /* ---------- Casilla de privacidad ---------- */
+  .campo-casilla {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: var(--espacio-xs);
+  }
+
+  .campo-casilla input {
+    width: var(--espacio-md);        /* 24px */
+    height: var(--espacio-md);
+    accent-color: var(--color-primario-intenso);   /* Color de la casilla marcada */
+  }
+
+  /* Aquí la etiqueta es una frase, no un rótulo: se anula el estilo de arriba */
+  .campo-casilla label {
+    font-size: var(--tamano-texto-md);
+    line-height: var(--interlineado-texto-md);
+    font-weight: var(--peso-normal);
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  /* ---------- Botón ---------- */
+  .boton-principal {
+    width: 100%;
+    border: 0;                       /* <button> trae borde propio; un <a> no */
+    cursor: pointer;
+  }
+}
+
+
+/* ==========================================================================
+   CONTACTO
+   ========================================================================== */
+@scope (.contacto) {
+
+  :scope {
+    padding-block: var(--espacio-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .contenedor {
+    display: grid;
+    gap: var(--espacio-md);
+  }
+
+  .encabezado {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
+
+  .sobretitulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-sm);
+    line-height: var(--interlineado-etiqueta);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-primario-intenso);
+  }
+
+  /* Recuadros de datos y horario */
+  .caja {
+    display: grid;
+    gap: var(--espacio-xs);
+    padding: var(--espacio-md);
+    background-color: var(--color-superficie);
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+  }
+
+  /* <address> se muestra en cursiva por defecto: se anula */
+  address {
+    font-style: normal;
+  }
+
+  .subtitulo {
+    font-size: var(--tamano-titulo-sm);
+    line-height: var(--interlineado-titulo-sm);
+  }
+
+  /* ---------- Horario (lista de descripción) ---------- */
+  .horario {
+    display: grid;
+    gap: var(--espacio-xs);
+  }
+
+  .dia {
+    display: flex;
+    flex-wrap: wrap;                 /* Si no cabe en una línea, el horario baja */
+    justify-content: space-between;
+    gap: var(--espacio-2xs) var(--espacio-sm);
+  }
+
+  dt {
+    font-weight: var(--peso-negrita);
+  }
+
+  .cerrado {
+    color: var(--color-texto-suave);
+  }
+
+  /* ---------- Mapa ---------- */
+  .mapa {
+    background-color: var(--color-superficie);
+    border: var(--borde-base);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-base);
+    overflow: hidden;                /* Recorta la imagen con las esquinas redondeadas */
+  }
+
+  .mapa img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .abrir-mapa {
+    display: block;
+    padding: var(--espacio-sm);
+    text-align: center;
+    font-family: var(--fuente-titulos);
+    font-weight: var(--peso-negrita);
+    text-transform: uppercase;
+    letter-spacing: var(--espacio-letras-etiqueta);
+    color: var(--color-primario-intenso);
+    text-underline-offset: 0.25em;
+
+    &:focus-visible {
+      outline: var(--foco-anillo);
+      outline-offset: calc(var(--foco-separacion) * -4);  /* Anillo por dentro: el padre recorta lo que sobresale */
+    }
+  }
+}
+
 @scope (.pie) {
 
   :scope {

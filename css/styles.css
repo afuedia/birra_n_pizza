@@ -173,7 +173,7 @@ h3 {
   :scope{
     display: flex;
     justify-content: center;
-    padding-block: var(--espacio-2xl);
+    padding-block: var(--espacio-xl);
   }
   .contenedor{
     width: 100%;
@@ -251,6 +251,12 @@ h3 {
     padding: var(--espacio-sm);
     border-radius: var(--radio-md);
     gap: var(--espacio-sm);
+  }
+  svg {
+    background-color: var(--color-etiqueta-fondo);
+    color: var(--color-etiqueta-texto);
+    padding: var(--espacio-xs);
+    border-radius: var(--radio-sm);
   }
   .textos{
     text-transform: uppercase;

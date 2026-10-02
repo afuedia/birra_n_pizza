@@ -210,8 +210,8 @@
 /* ==========================================================================
    PUNTOS DE CORTE (breakpoints)
    --------------------------------------------------------------------------
-   Móvil:      < 640px
-   Tablet:     640px – 1023px
+   Móvil:      < 768px
+   Tablet:     768px – 1023px
    Escritorio: ≥ 1024px
 
    ⚠️ Los puntos de corte NO pueden ser variables CSS:
@@ -227,7 +227,7 @@
    ========================================================================== */
 
 /* Tablet en adelante: más aire lateral */
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   :root {
     --separacion-columnas: var(--medida-24);
     --margen-pagina: var(--medida-32);
@@ -235,7 +235,7 @@
 }
 
 /* Escritorio: titulares a tamaño completo.
-   Decisión: se amplían a partir de 1024px y no de 640px porque en tablet
+   Decisión: se amplían a partir de 1024px y no de 768px porque en tablet
    vertical 56px sigue siendo demasiado grande para el ancho disponible. */
 @media (min-width: 1024px) {
   :root {

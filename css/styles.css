@@ -17,6 +17,7 @@ h1 {
   line-height: var(--interlineado-titulo-xl);
   font-weight: var(--peso-negrita);
   letter-spacing: var(--espacio-letras-titulo);
+
 }
 
 h2 {
@@ -188,7 +189,11 @@ h3 {
   .acciones{
     display: flex;
     flex-direction: column;
-    gap: var(--espacio-xs)
+    gap: var(--espacio-xs);
+    @media (min-width: 768px) {
+      flex-direction: row;
+      width: 100%;
+    }
   }
   .boton-principal{
     background-color: var(--color-accion);
@@ -199,7 +204,7 @@ h3 {
   }
   .boton-secundario{
     border: var(--borde-grosor-fuerte) solid var(--color-primario);
-  color: var(--color-primario); 
+  color: var(--color-primario-intenso); 
   &:hover {
     background-color: var(--color-primario);
     color: var(--color-sobre-accion);
@@ -238,11 +243,15 @@ h3 {
     width: 100%;
     max-width: var(--ancho-maximo);
     margin-inline: var(--margen-pagina);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--espacio-md)
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espacio-md);
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
   }
   .ficha{
     background-color: var(--color-superficie);
@@ -286,11 +295,8 @@ h3 {
     width: 100%;
     max-width: var(--ancho-maximo);
     margin-inline: var(--margen-pagina);
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: center;
-    gap: var(--espacio-md)
+    
+    
   }
   .encabezado{
     width: 100%;
@@ -299,7 +305,20 @@ h3 {
   .sobretitulo {
     text-transform: uppercase;
     font-weight: var(--peso-negrita);
-    color: var(--color-primario)
+    color: var(--color-primario-intenso)
+  }
+  ul {
+    display: grid;
+    gap: var(--espacio-md);
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  .carta {
+    text-align: center;
   }
 }
 

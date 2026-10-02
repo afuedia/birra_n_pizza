@@ -1,335 +1,434 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO -->
-  <title>Pizzas y cervezas en Armeñime | Birra N Pizza</title>
-  <meta name="description" content="Pizzas de masa madre al horno de piedra y cerveza artesana de elaboración propia en Armeñime. Consulta la carta y reserva tu mesa.">
-  
-  <!-- Etiquetas que me da RealFaviconGenerator -->
-  <link rel="icon" type="image/png" href="assets/icons/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
-  <link rel="shortcut icon" href="assets/icons/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
-  <link rel="manifest" href="assets/icons/site.webmanifest" />
-  
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/primitivos.css">
-  <link rel="stylesheet" href="css/semanticos.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  
-<header class="cabecera">
-  <div class="contenedor">
-  <a href="index.html" class="logo">
-    <img src="assets/img/logo.svg" alt="Birra N Pizza" width="120" height="40">
-  </a>
+    <!-- SEO -->
+    <title>Pizzas y cervezas en Armeñime | Birra N Pizza</title>
+    <meta
+      name="description"
+      content="Pizzas de masa madre al horno de piedra y cerveza artesana de elaboración propia en Armeñime. Consulta la carta y reserva tu mesa."
+    />
 
-  <nav class="menu" id="menu-principal" aria-label="Principal">
-    <ul class="lista" role="list">
-      <li><a href="carta.html" class="enlace">Carta</a></li>
-      <li><a href="cervezas.html" class="enlace">Cervezas</a></li>
-      <li><a href="contacto.html" class="enlace">Contacto</a></li>
-    </ul>
-  </nav>
+    <!-- Etiquetas que me da RealFaviconGenerator -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+    <link rel="shortcut icon" href="assets/icons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/icons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="assets/icons/site.webmanifest" />
 
-  <div class="acciones">
-    <a href="tel:+34922000000" class="boton boton-icono">
-      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#telefono"></use>
-      </svg>
-      <span class="solo-lectores">Llamar al 922 000 000</span>
-    </a>
-    <a href="reservas.html" class="boton boton-principal">Reservar</a>
-    <button class="abrir-menu" aria-expanded="false" aria-controls="menu-principal">
-      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#menu"/>
-      </svg>
-      <span class="solo-lectores">Abrir menú</span>
-    </button>
-  </div>
-  </div>
-</header>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/primitivos.css" />
+    <link rel="stylesheet" href="css/semanticos.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="cabecera">
+      <div class="contenedor">
+        <a href="index.html" class="logo">
+          <img
+            src="assets/img/logo.svg"
+            alt="Birra N Pizza"
+            width="120"
+            height="40"
+          />
+        </a>
 
-<main>
-  
-  <section class="portada">
-  <div class="contenedor">  
-    <hgroup class="encabezado">
-      <h1 class="titulo">Pizza de masa madre y cerveza artesana</h1>
-      <p class="texto">Harinas ecológicas, fermentaciones lentas y cervezas de barril tiradas a la temperatura ideal.</p>
-    </hgroup>
-    <div class="acciones">
-      <a href="reservas.html" class="boton boton-principal">Reservar mesa</a>
-      <a href="carta.html" class="boton boton-secundario">Ver la carta</a>
-    </div>
-    <img src="assets/img/pizza.png" alt="Maridaje de la semana">
-    <ul role="list" class="datos">
-        <li class="dato"><span class="destacado">48 h</span> fermentando</li>
-        <li class="dato"><span class="destacado">8 grifos</span> locales</li>
-        <li class="dato"><span class="destacado">250º C</span>on fire</li>
-    </ul>
-   </div> 
-  </section>
+        <nav class="menu" id="menu-principal" aria-label="Principal">
+          <ul class="lista" role="list">
+            <li><a href="carta.html" class="enlace">Carta</a></li>
+            <li><a href="cervezas.html" class="enlace">Cervezas</a></li>
+            <li><a href="contacto.html" class="enlace">Contacto</a></li>
+          </ul>
+        </nav>
 
-  <section class="informacion">
-    <h2 class="solo-lectores">Información</h2>
-    <div class="contenedor">
-     <div class="ficha">
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#reloj"/>
-      </svg>
-      <div class="textos">
-        Horario <span class="destacado">13:00 - 20:00</span> 
+        <div class="acciones">
+          <a href="tel:+34922000000" class="boton boton-icono">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#telefono"></use>
+            </svg>
+            <span class="solo-lectores">Llamar al 922 000 000</span>
+          </a>
+          <a href="reservas.html" class="boton boton-principal">Reservar</a>
+          <button
+            class="abrir-menu"
+            aria-expanded="false"
+            aria-controls="menu-principal"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#menu" />
+            </svg>
+            <span class="solo-lectores">Abrir menú</span>
+          </button>
+        </div>
       </div>
-     </div> 
-    
-    
-    <div class="ficha">
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#ubicacion"/>
-      </svg>
-      <div class="textos">
-        Dirección <span class="destacado">Calle de la Cebada, 84</span>
-      </div>
-    </div>
+    </header>
 
-    <div class="ficha">
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#telefono"/>
-      </svg>
-      <div class="textos">
-        Teléfono <a href="tel:+34922000000" class="destacado">922 000 000</a>
-      </div>
-    </div>
-
-    <div class="ficha">
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
-        <use href="assets/icons/iconos.svg#bolsa"/>
-      </svg>
-      <div class="textos">
-        Pedidos para llevar <span class="destacado">10% de descuento</span>
-      </div>
-    </div>
-
-    </div>
-  </section>
-
-  <section class="pizzas">
-    <div class="contenedor">
-      <hgroup class="encabezado">
-      <p class="sobretitulo">Especialidades</p>
-      <h2 class="titulo">Nuestras pizzas</h2>
-      <p class="subtitulo">Masa madre y horno de piedra</p>
-    </hgroup>
-
-    <article class="tarjeta">
-      <header class="encabezado">
-        <h3 class="nombre">Margarita TOP</h3>
-        <p class="precio">6€</p>
-      </header>
-      <p class="ingredientes">Queso, albaca y tal</p>
-      <div class="alergenos">
-        <p>Alergenos:</p>
-        <ul role="list">
-          <li class="alergeno">G</li>
-          <li class="alergeno">L</li>
-        </ul>
-      </div>
-      <img class="imagen" src="assets/img/pizza.png" alt="">
-    </article>
-
-      <article class="tarjeta">
-      <header class="encabezado">
-        <h3 class="nombre">Margarita TOP</h3>
-        <p class="precio">6€</p>
-      </header>
-      <p class="ingredientes">Queso, albaca y tal</p>
-      <div class="alergenos">
-        <p>Alergenos:</p>
-        <ul role="list">
-          <li class="alergeno">G</li>
-          <li class="alergeno">L</li>
-        </ul>
-      </div>
-      <img class="imagen" src="assets/img/pizza.png" alt="">
-    </article>
-  
-      <article class="tarjeta">
-      <header class="encabezado">
-        <h3 class="nombre">Margarita TOP</h3>
-        <p class="precio">6€</p>
-      </header>
-      <p class="ingredientes">Queso, albaca y tal</p>
-      <div class="alergenos">
-        <p>Alergenos:</p>
-        <ul role="list">
-          <li class="alergeno">G</li>
-          <li class="alergeno">L</li>
-        </ul>
-      </div>
-      <img class="imagen" src="assets/img/pizza.png" alt="">
-    </article>
-
-    <a class="carta" href="">Ver todas las pizzas</a>
-    </div>
-    
-  </section>
-  
-  <section class="cervezas">
-    <div class="contenedor">
-      <hgroup class="encabezado">
-        <p class="sobretitulo">Grifo rotativo - Cambia cada semana</p>
-        <h2 class="titulo">Pizarrón de cervezas  </h2>
-        <p class="subtitulo">Precios: Media pinta / Pinta</p>
-      </hgroup>
-
-      <ul role="list" class="pizarra">
-        <li class="cerveza">
-          <div class="info">
-            <h3 class="nombre"><span class="numero">01 </span>Cierzo Wave</h3>
-            <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
+    <main>
+      <section class="portada">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <h1 class="titulo">Pizza de masa madre y cerveza artesana</h1>
+            <p class="texto">
+              Harinas ecológicas, fermentaciones lentas y cervezas de barril
+              tiradas a la temperatura ideal.
+            </p>
+          </hgroup>
+          <div class="acciones">
+            <a href="reservas.html" class="boton boton-principal"
+              >Reservar mesa</a
+            >
+            <a href="carta.html" class="boton boton-secundario">Ver la carta</a>
           </div>
-        <p class="precio">3,80 € / 5,50 €</p>
-        </li>
-        <li class="cerveza">
-          <div class="info">
-            <h3 class="nombre"><span class="numero">01 </span>Cierzo Wave</h3>
-            <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
-          </div>
-        <p class="precio">3,80 € / 5,50 €</p>
-        </li>
-        <li class="cerveza">
-          <div class="info">
-            <h3 class="nombre"><span class="numero">01 </span>Cierzo Wave</h3>
-            <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
-          </div>
-        <p class="precio">3,80 € / 5,50 €</p>
-        </li>
-        <li class="cerveza">
-          <div class="info">
-            <h3 class="nombre"><span class="numero">01 </span>Cierzo Wave</h3>
-            <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
-          </div>
-        <p class="precio">3,80 € / 5,50 €</p>
-        </li>
-      </ul>
-      
-    </div>
-  </section>
-  
-  <section class="filosofia">
-    <div class="contenedor">
-      <hgroup class="encabezado">
-        <h2 class="titulo">Nuestra filosofía</h2>
-        <p class="subtitulo">Respeto por el tiempo y el oficio</p>
-      </hgroup>
-      <article class="bloque">
-        <hgroup class="encabezado">
-          <h3 class="titulo">01 - El obrador</h3>
-          <p class="subtitulo">La masa madre y la fermentación larga</p>
-        </hgroup>
-        <p class="explicacion">Nuestra masa madre tiene más de 48 años</p>
-        <p class="nota">Horneada a altas temperaturas</p>
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-      </article>
-      <article class="bloque">
-        <hgroup class="encabezado">
-          <h3 class="titulo">02 - El brewhouse</h3>
-          <p class="subtitulo">Cervezas elaboradas en el mismo local</p>
-        </hgroup>
-        <p class="explicacion">Nuestra masa madre tiene más de 48 años</p>
-        <p class="nota">Elaboradas con cariño</p>
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-      </article>
-    </div>
-  </section>
+          <img src="assets/img/pizza.png" alt="Maridaje de la semana" />
+          <ul role="list" class="datos">
+            <li class="dato">
+              <span class="destacado">48 h</span> fermentando
+            </li>
+            <li class="dato">
+              <span class="destacado">8 grifos</span> locales
+            </li>
+            <li class="dato"><span class="destacado">250º C</span>on fire</li>
+          </ul>
+        </div>
+      </section>
 
-  <section class="ambiente">
-    <div class="contenedor">
-      <hgroup class="encabezado">
-        <h2 class="titulo">El ambiente</h2>
-        <p class="subtitulo">La vida en Birra N Pizza</p>
-      </hgroup>
-      <div class="imagenes">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-        <img class="imagen" src="assets/img/pizza.png" alt="">
-      </div>
-    </div>
-  </section>
-  
-  <section class="opiniones" id="opiniones">
-  <div class="contenedor">
-    <hgroup class="encabezado">
-      <p class="sobretitulo">Comunidad</p>
-      <h2 class="titulo">Opiniones de nuestros clientes</h2>
-    </hgroup>
+      <section class="informacion">
+        <h2 class="solo-lectores">Información</h2>
+        <div class="contenedor">
+          <div class="ficha">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#reloj" />
+            </svg>
+            <div class="textos">
+              Horario <span class="destacado">13:00 - 20:00</span>
+            </div>
+          </div>
 
-    <ul role="list" class="lista">
-      <li>
-        <figure class="opinion">
-          <p class="estrellas">
-            <span aria-hidden="true">★★★★★</span>
-            <span class="solo-lectores">Valoración: 5 de 5</span>
-          </p>
-          <blockquote class="texto">
-            <p>La masa es otro nivel: borde brutal y no te pesa nada. La combinación con la IPA de grifo fue de diez.</p>
-          </blockquote>
-          <figcaption>
-            <span class="autor">Carlos Mendía</span>
-            <span class="perfil">Vecino de Armeñime</span>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="opinion">
-          <p class="estrellas">
-            <span aria-hidden="true">★★★★★</span>
-            <span class="solo-lectores">Valoración: 5 de 5</span>
-          </p>
-          <blockquote class="texto">
-            <p>Cuidan tanto los grifos como los ingredientes. La rotación de barriles engancha: cada semana hay algo nuevo que probar.</p>
-          </blockquote>
-          <figcaption>
-            <span class="autor">Lucía Serrano</span>
-            <span class="perfil">Aficionada a la cerveza artesana</span>
-          </figcaption>
-        </figure>
-      </li>
-      <li>
-        <figure class="opinion">
-          <p class="estrellas">
-            <span aria-hidden="true">★★★★☆</span>
-            <span class="solo-lectores">Valoración: 4 de 5</span>
-          </p>
-          <blockquote class="texto">
-            <p>Servicio rápido incluso un viernes lleno. Ambiente informal y una pizza de setas insuperable.</p>
-          </blockquote>
-          <figcaption>
-            <span class="autor">David Alarcón</span>
-            <span class="perfil">Cliente habitual</span>
-          </figcaption>
-        </figure>
-      </li>
-    </ul>
-  </div>
-</section>
+          <div class="ficha">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#ubicacion" />
+            </svg>
+            <div class="textos">
+              Dirección <span class="destacado">Calle de la Cebada, 84</span>
+            </div>
+          </div>
 
-  <section class="reservas">
-    <div class="contenedor">
-      <hgroup class="encabezado">
-        <h2 class="titulo">Reserva tu mesa</h2>
-        <p class="subtitulo">¡No te quedes sin ella!</p>
-      </hgroup>
-      <!-- ==========================================================================
+          <div class="ficha">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#telefono" />
+            </svg>
+            <div class="textos">
+              Teléfono
+              <a href="tel:+34922000000" class="destacado">922 000 000</a>
+            </div>
+          </div>
+
+          <div class="ficha">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24">
+              <use href="assets/icons/iconos.svg#bolsa" />
+            </svg>
+            <div class="textos">
+              Pedidos para llevar
+              <span class="destacado">10% de descuento</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pizzas">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <p class="sobretitulo">Especialidades</p>
+            <h2 class="titulo">Nuestras pizzas</h2>
+            <p class="subtitulo">Masa madre y horno de piedra</p>
+          </hgroup>
+          <ul role="list">
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <header class="encabezado">
+                  <h3 class="nombre">Margarita TOP</h3>
+                  <p class="precio">6€</p>
+                </header>
+                <p class="ingredientes">Queso, albaca y tal</p>
+                <div class="alergenos">
+                  <p>Alergenos:</p>
+                  <ul role="list">
+                    <li class="alergeno">G</li>
+                    <li class="alergeno">L</li>
+                  </ul>
+                </div>
+                <img class="imagen" src="assets/img/pizza.png" alt="" />
+              </article>
+            </li>
+          </ul>
+
+          <a class="carta" href="">Ver todas las pizzas</a>
+        </div>
+      </section>
+
+      <section class="cervezas">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <p class="sobretitulo">Grifo rotativo - Cambia cada semana</p>
+            <h2 class="titulo">Pizarrón de cervezas</h2>
+            <p class="subtitulo">Precios: Media pinta / Pinta</p>
+          </hgroup>
+
+          <ul role="list" class="pizarra">
+            <li class="cerveza">
+              <div class="info">
+                <h3 class="nombre">
+                  <span class="numero">01 </span>Cierzo Wave
+                </h3>
+                <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
+              </div>
+              <p class="precio">3,80 € / 5,50 €</p>
+            </li>
+            <li class="cerveza">
+              <div class="info">
+                <h3 class="nombre">
+                  <span class="numero">01 </span>Cierzo Wave
+                </h3>
+                <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
+              </div>
+              <p class="precio">3,80 € / 5,50 €</p>
+            </li>
+            <li class="cerveza">
+              <div class="info">
+                <h3 class="nombre">
+                  <span class="numero">01 </span>Cierzo Wave
+                </h3>
+                <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
+              </div>
+              <p class="precio">3,80 € / 5,50 €</p>
+            </li>
+            <li class="cerveza">
+              <div class="info">
+                <h3 class="nombre">
+                  <span class="numero">01 </span>Cierzo Wave
+                </h3>
+                <p class="descripcion">Hazy IPA - 6,5 % - Zaragoza</p>
+              </div>
+              <p class="precio">3,80 € / 5,50 €</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="filosofia">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <h2 class="titulo">Nuestra filosofía</h2>
+            <p class="subtitulo">Respeto por el tiempo y el oficio</p>
+          </hgroup>
+          <article class="bloque">
+            <hgroup class="encabezado">
+              <h3 class="titulo">01 - El obrador</h3>
+              <p class="subtitulo">La masa madre y la fermentación larga</p>
+            </hgroup>
+            <p class="explicacion">Nuestra masa madre tiene más de 48 años</p>
+            <p class="nota">Horneada a altas temperaturas</p>
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+          </article>
+          <article class="bloque">
+            <hgroup class="encabezado">
+              <h3 class="titulo">02 - El brewhouse</h3>
+              <p class="subtitulo">Cervezas elaboradas en el mismo local</p>
+            </hgroup>
+            <p class="explicacion">Nuestra masa madre tiene más de 48 años</p>
+            <p class="nota">Elaboradas con cariño</p>
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+          </article>
+        </div>
+      </section>
+
+      <section class="ambiente">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <h2 class="titulo">El ambiente</h2>
+            <p class="subtitulo">La vida en Birra N Pizza</p>
+          </hgroup>
+          <div class="imagenes">
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+            <img class="imagen" src="assets/img/pizza.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="opiniones" id="opiniones">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <p class="sobretitulo">Comunidad</p>
+            <h2 class="titulo">Opiniones de nuestros clientes</h2>
+          </hgroup>
+
+          <ul role="list" class="lista">
+            <li>
+              <figure class="opinion">
+                <p class="estrellas">
+                  <span aria-hidden="true">★★★★★</span>
+                  <span class="solo-lectores">Valoración: 5 de 5</span>
+                </p>
+                <blockquote class="texto">
+                  <p>
+                    La masa es otro nivel: borde brutal y no te pesa nada. La
+                    combinación con la IPA de grifo fue de diez.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="autor">Carlos Mendía</span>
+                  <span class="perfil">Vecino de Armeñime</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="opinion">
+                <p class="estrellas">
+                  <span aria-hidden="true">★★★★★</span>
+                  <span class="solo-lectores">Valoración: 5 de 5</span>
+                </p>
+                <blockquote class="texto">
+                  <p>
+                    Cuidan tanto los grifos como los ingredientes. La rotación
+                    de barriles engancha: cada semana hay algo nuevo que probar.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="autor">Lucía Serrano</span>
+                  <span class="perfil">Aficionada a la cerveza artesana</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="opinion">
+                <p class="estrellas">
+                  <span aria-hidden="true">★★★★☆</span>
+                  <span class="solo-lectores">Valoración: 4 de 5</span>
+                </p>
+                <blockquote class="texto">
+                  <p>
+                    Servicio rápido incluso un viernes lleno. Ambiente informal
+                    y una pizza de setas insuperable.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="autor">David Alarcón</span>
+                  <span class="perfil">Cliente habitual</span>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="reservas">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <h2 class="titulo">Reserva tu mesa</h2>
+            <p class="subtitulo">¡No te quedes sin ella!</p>
+          </hgroup>
+          <!-- ==========================================================================
      FORMULARIO DE RESERVA
 
      <form> agrupa los controles y define a dónde y cómo se envían los datos:
@@ -338,202 +437,275 @@
      - method: "post" envía los datos dentro de la petición (lo normal para
        reservas o contacto). "get" los pone en la URL (para buscadores).
      ========================================================================== -->
-<form class="formulario" action="#" method="post">
+          <form class="formulario" action="#" method="post">
+            <!-- Avisar de qué es obligatorio ANTES del formulario, no después -->
+            <p class="nota">
+              Los campos marcados con <span aria-hidden="true">*</span> son
+              obligatorios.
+            </p>
 
-  <!-- Avisar de qué es obligatorio ANTES del formulario, no después -->
-  <p class="nota">Los campos marcados con <span aria-hidden="true">*</span> son obligatorios.</p>
-
-  <!-- Un .campo por cada pareja etiqueta + control: así se maquetan igual
+            <!-- Un .campo por cada pareja etiqueta + control: así se maquetan igual
        todos y se pueden colocar con grid o flex -->
-  <div class="campo">
-    <!-- LABEL: el texto que describe el campo. Se enlaza con el control
+            <div class="campo">
+              <!-- LABEL: el texto que describe el campo. Se enlaza con el control
          mediante for="" (aquí) e id="" (en el input): deben coincidir.
          Así, al pulsar el texto se activa el campo y el lector de pantalla
          anuncia "Nombre completo" al entrar en él.
          El placeholder NO sustituye a la label: desaparece al escribir. -->
-    <label for="nombre">Nombre completo <span aria-hidden="true">*</span></label>
+              <label for="nombre"
+                >Nombre completo <span aria-hidden="true">*</span></label
+              >
 
-    <!-- id  → para enlazar con la label (único en toda la página)
+              <!-- id  → para enlazar con la label (único en toda la página)
          name → el nombre con el que viaja el dato al servidor.
                 SIN name, el campo no se envía.
          autocomplete → el navegador rellena el dato él solo ("name", "tel"…) -->
-    <input type="text" id="nombre" name="nombre" autocomplete="name"
-           placeholder="Marta Gómez" required>
-    <!-- required: el navegador impide enviar el formulario si está vacío -->
-  </div>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                autocomplete="name"
+                placeholder="Marta Gómez"
+                required
+              />
+              <!-- required: el navegador impide enviar el formulario si está vacío -->
+            </div>
 
-  <div class="campo">
-    <label for="telefono">Teléfono móvil <span aria-hidden="true">*</span></label>
-    <!-- type="tel": en el móvil muestra el teclado numérico.
+            <div class="campo">
+              <label for="telefono"
+                >Teléfono móvil <span aria-hidden="true">*</span></label
+              >
+              <!-- type="tel": en el móvil muestra el teclado numérico.
          No valida el formato: solo cambia el teclado. -->
-    <input type="tel" id="telefono" name="telefono" autocomplete="tel"
-           placeholder="600 000 000" required>
-  </div>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                autocomplete="tel"
+                placeholder="600 000 000"
+                required
+              />
+            </div>
 
-  <!-- Fecha y turno comparten fila en la maqueta -->
-  <div class="fila">
-    <div class="campo">
-      <label for="fecha">Fecha <span aria-hidden="true">*</span></label>
-      <!-- type="date": selector de fecha nativo. Admite min="" y max=""
+            <!-- Fecha y turno comparten fila en la maqueta -->
+            <div class="fila">
+              <div class="campo">
+                <label for="fecha"
+                  >Fecha <span aria-hidden="true">*</span></label
+                >
+                <!-- type="date": selector de fecha nativo. Admite min="" y max=""
            (el "mínimo = hoy" se pone con JavaScript, porque cambia cada día) -->
-      <input type="date" id="fecha" name="fecha" required>
-    </div>
+                <input type="date" id="fecha" name="fecha" required />
+              </div>
 
-    <div class="campo">
-      <label for="turno">Turno <span aria-hidden="true">*</span></label>
-      <!-- SELECT: lista desplegable. Cada <option> tiene:
+              <div class="campo">
+                <label for="turno"
+                  >Turno <span aria-hidden="true">*</span></label
+                >
+                <!-- SELECT: lista desplegable. Cada <option> tiene:
            - value → lo que se ENVÍA al servidor
            - texto → lo que VE la persona
            selected marca la opción por defecto -->
-      <select id="turno" name="turno" required>
-        <option value="14:00">14:00 h</option>
-        <option value="15:00">15:00 h</option>
-        <option value="21:00" selected>21:00 h</option>
-        <option value="22:30">22:30 h</option>
-      </select>
-    </div>
-  </div>
+                <select id="turno" name="turno" required>
+                  <option value="14:00">14:00 h</option>
+                  <option value="15:00">15:00 h</option>
+                  <option value="21:00" selected>21:00 h</option>
+                  <option value="22:30">22:30 h</option>
+                </select>
+              </div>
+            </div>
 
-  <div class="campo">
-    <label for="personas">Número de personas <span aria-hidden="true">*</span></label>
-    <!-- type="number" con min y max: valida el rango.
+            <div class="campo">
+              <label for="personas"
+                >Número de personas <span aria-hidden="true">*</span></label
+              >
+              <!-- type="number" con min y max: valida el rango.
          (La maqueta usa un select; aquí se ve otra forma de resolverlo.) -->
-    <input type="number" id="personas" name="personas" min="1" max="12" value="2" required>
-  </div>
+              <input
+                type="number"
+                id="personas"
+                name="personas"
+                min="1"
+                max="12"
+                value="2"
+                required
+              />
+            </div>
 
-  <div class="campo">
-    <label for="comentarios">Comentarios (alergias, celebraciones…)</label>
-    <!-- TEXTAREA: texto largo. No es una etiqueta vacía: el contenido va
+            <div class="campo">
+              <label for="comentarios"
+                >Comentarios (alergias, celebraciones…)</label
+              >
+              <!-- TEXTAREA: texto largo. No es una etiqueta vacía: el contenido va
          ENTRE las etiquetas y no lleva value=""
          rows → altura inicial; maxlength → límite de caracteres -->
-    <textarea id="comentarios" name="comentarios" rows="3" maxlength="300"
-              placeholder="Celiaquía, trona para bebé…"></textarea>
-  </div>
+              <textarea
+                id="comentarios"
+                name="comentarios"
+                rows="3"
+                maxlength="300"
+                placeholder="Celiaquía, trona para bebé…"
+              ></textarea>
+            </div>
 
-  <!-- CASILLA DE CONSENTIMIENTO (RGPD): obligatoria y NUNCA premarcada.
+            <!-- CASILLA DE CONSENTIMIENTO (RGPD): obligatoria y NUNCA premarcada.
        Con checkbox y radio, el input va ANTES de la label (así se maqueta
        mejor con flex) y el for/id funciona igual. -->
-  <div class="campo campo-casilla">
-    <input type="checkbox" id="privacidad" name="privacidad" required>
-    <label for="privacidad">
-      He leído y acepto la <a href="privacidad.html">política de privacidad</a>.
-      <span aria-hidden="true">*</span>
-    </label>
-  </div>
+            <div class="campo campo-casilla">
+              <input
+                type="checkbox"
+                id="privacidad"
+                name="privacidad"
+                required
+              />
+              <label for="privacidad">
+                He leído y acepto la
+                <a href="privacidad.html">política de privacidad</a>.
+                <span aria-hidden="true">*</span>
+              </label>
+            </div>
 
-  <!-- Información básica del RGPD (primera capa): quién, para qué y cómo
+            <!-- Información básica del RGPD (primera capa): quién, para qué y cómo
        ejercer los derechos. El resto, en la política de privacidad. -->
-  <p class="informacion-legal">
-    <small>Responsable: Birra N Pizza S.L. Finalidad: gestionar tu reserva.
-    Puedes ejercer tus derechos en hola@birranpizza.es.</small>
-  </p>
+            <p class="informacion-legal">
+              <small
+                >Responsable: Birra N Pizza S.L. Finalidad: gestionar tu
+                reserva. Puedes ejercer tus derechos en
+                hola@birranpizza.es.</small
+              >
+            </p>
 
-  <!-- BOTÓN: <button type="submit"> envía el formulario.
+            <!-- BOTÓN: <button type="submit"> envía el formulario.
        <input type="button"> no hace NADA sin JavaScript (es lo que tenías).
        Como es un botón que HACE algo, es <button>, no <a>. -->
-  <button type="submit" class="boton boton-principal">Confirmar reserva</button>
-
-</form>
-      <!-- Aquí va un formulario, repasito -->
-    </div>
-  </section>
-
-  <section class="contacto" id="contacto">
-  <div class="contenedor">
-    <hgroup class="encabezado">
-      <p class="sobretitulo">Encuéntranos</p>
-      <h2 class="titulo">Contacto y ubicación</h2>
-    </hgroup>
-
-    <address class="caja">
-      <p><strong>Dirección:</strong> Calle de la Cebada, 84, Armeñime (Tenerife)</p>
-      <p><strong>Teléfono:</strong> <a href="tel:+34922000000">922&nbsp;000&nbsp;000</a></p>
-      <p><strong>Correo:</strong> <a href="mailto:hola@birranpizza.es">hola@birranpizza.es</a></p>
-    </address>
-
-    <div class="caja">
-      <h3 class="subtitulo">Horario semanal</h3>
-      <dl class="horario">
-        <div class="dia cerrado">
-          <dt>Lunes</dt>
-          <dd>Cerrado por descanso</dd>
+            <button type="submit" class="boton boton-principal">
+              Confirmar reserva
+            </button>
+          </form>
+          <!-- Aquí va un formulario, repasito -->
         </div>
-        <div class="dia">
-          <dt>Martes a jueves</dt>
-          <dd>13:00–16:30 · 20:00–23:30</dd>
+      </section>
+
+      <section class="contacto" id="contacto">
+        <div class="contenedor">
+          <hgroup class="encabezado">
+            <p class="sobretitulo">Encuéntranos</p>
+            <h2 class="titulo">Contacto y ubicación</h2>
+          </hgroup>
+
+          <address class="caja">
+            <p>
+              <strong>Dirección:</strong> Calle de la Cebada, 84, Armeñime
+              (Tenerife)
+            </p>
+            <p>
+              <strong>Teléfono:</strong>
+              <a href="tel:+34922000000">922&nbsp;000&nbsp;000</a>
+            </p>
+            <p>
+              <strong>Correo:</strong>
+              <a href="mailto:hola@birranpizza.es">hola@birranpizza.es</a>
+            </p>
+          </address>
+
+          <div class="caja">
+            <h3 class="subtitulo">Horario semanal</h3>
+            <dl class="horario">
+              <div class="dia cerrado">
+                <dt>Lunes</dt>
+                <dd>Cerrado por descanso</dd>
+              </div>
+              <div class="dia">
+                <dt>Martes a jueves</dt>
+                <dd>13:00–16:30 · 20:00–23:30</dd>
+              </div>
+              <div class="dia">
+                <dt>Viernes y sábado</dt>
+                <dd>13:00–01:00</dd>
+              </div>
+              <div class="dia">
+                <dt>Domingo</dt>
+                <dd>12:30–17:00 · 20:00–23:30</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="mapa">
+            <img
+              src="assets/img/mapa.jpeg"
+              alt="Mapa de la zona con la ubicación de Birra N Pizza en la Calle de la Cebada"
+              width="800"
+              height="533"
+            />
+            <a
+              class="abrir-mapa"
+              href="https://www.google.com/maps/search/?api=1&query=Calle+de+la+Cebada+84+Armeñime"
+              >Abrir en Google Maps →</a
+            >
+          </div>
         </div>
-        <div class="dia">
-          <dt>Viernes y sábado</dt>
-          <dd>13:00–01:00</dd>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <p class="logotipo">
+          <a href="index.html">
+            <img
+              src="assets/img/logo.svg"
+              alt="Birra N Pizza"
+              width="120"
+              height="40"
+            />
+          </a>
+        </p>
+        <p class="descripcion">Masa madre y cervezas artesanales.</p>
+        <nav aria-label="Pie de página">
+          <ul role="list" class="enlaces">
+            <li><a href="#pizzas">Pizzas</a></li>
+            <li><a href="#cervezas">Cervezas</a></li>
+            <li><a href="#filosofia">Nosotros</a></li>
+            <li><a href="#reservas">Reservas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <ul role="list" class="redes">
+          <li>
+            <a href="#">
+              <span aria-hidden="true">IG</span>
+              <span class="solo-lectores">Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span aria-hidden="true">UT</span>
+              <span class="solo-lectores">Untappd</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span aria-hidden="true">FB</span>
+              <span class="solo-lectores">Facebook</span>
+            </a>
+          </li>
+        </ul>
+        <p class="aviso">
+          <strong>Consumo responsable:</strong> venta y consumo reservados a
+          mayores de 18 años.
+        </p>
+        <div class="legal">
+          <small class="letra-pequeña"
+            >© 2026 Birra N Pizza · Proyecto formativo</small
+          >
+          <nav aria-label="Legal">
+            <ul role="list" class="enlaces-legales">
+              <li><a href="aviso-legal.html">Aviso legal</a></li>
+              <li><a href="privacidad.html">Privacidad</a></li>
+              <li><a href="cookies.html">Cookies</a></li>
+            </ul>
+          </nav>
         </div>
-        <div class="dia">
-          <dt>Domingo</dt>
-          <dd>12:30–17:00 · 20:00–23:30</dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="mapa">
-      <img src="assets/img/mapa.jpeg" alt="Mapa de la zona con la ubicación de Birra N Pizza en la Calle de la Cebada" width="800" height="533">
-      <a class="abrir-mapa" href="https://www.google.com/maps/search/?api=1&query=Calle+de+la+Cebada+84+Armeñime">Abrir en Google Maps →</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-
-<footer class="pie">
-  <div class="contenedor">
-    <p class="logotipo">
-     <a href="index.html">
-        <img src="assets/img/logo.svg" alt="Birra N Pizza" width="120" height="40">
-      </a> 
-    </p>
-    <p class="descripcion">Masa madre y cervezas artesanales.</p>
-    <nav aria-label="Pie de página">
-      <ul role="list" class="enlaces">
-        <li><a href="#pizzas">Pizzas</a></li>
-        <li><a href="#cervezas">Cervezas</a></li>
-        <li><a href="#filosofia">Nosotros</a></li>
-        <li><a href="#reservas">Reservas</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-    <ul role="list" class="redes">
-      <li>
-        <a href="#">
-          <span aria-hidden="true">IG</span>
-          <span class="solo-lectores">Instagram</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span aria-hidden="true">UT</span>
-          <span class="solo-lectores">Untappd</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span aria-hidden="true">FB</span>
-          <span class="solo-lectores">Facebook</span>
-        </a>
-      </li>
-    </ul>
-    <p class="aviso">
-      <strong>Consumo responsable:</strong> venta y consumo reservados a mayores de 18 años.
-    </p>
-    <div class="legal">
-      <small class="letra-pequeña">© 2026 Birra N Pizza · Proyecto formativo</small>
-    <nav aria-label="Legal">
-      <ul role="list" class="enlaces-legales">
-        <li><a href="aviso-legal.html">Aviso legal</a></li>
-        <li><a href="privacidad.html">Privacidad</a></li>
-        <li><a href="cookies.html">Cookies</a></li>
-      </ul>
-    </nav>
-    </div>
-  </div>
-</footer>
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

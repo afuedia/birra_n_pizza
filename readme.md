@@ -4,7 +4,7 @@ Web de ejemplo de una pizzería de masa madre y cerveza artesana, desarrollada c
 
 Es un proyecto formativo: sirve como modelo para el alumnado de un curso de creación y publicación de páginas web. Por eso este README documenta no solo **qué** hay en el proyecto, sino **por qué** se tomó cada decisión.
 
-> **Estado:** en desarrollo. La maquetación para móvil está prácticamente terminada y el sistema de tokens en dos capas, cerrado. Faltan la refactorización de los componentes globales, las versiones para tablet y escritorio, el JavaScript del menú y las páginas secundarias.
+> **Estado:** en desarrollo. La página principal está maquetada y es **responsive** (móvil, tablet y escritorio), y el sistema de tokens en dos capas, cerrado. Faltan la refactorización de los componentes globales, el JavaScript del menú y del formulario, y las páginas secundarias.
 
 ---
 
@@ -23,6 +23,13 @@ Es un proyecto formativo: sirve como modelo para el alumnado de un curso de crea
     - [Por qué no BEM](#por-qué-no-bem)
     - [Cómo funciona](#cómo-funciona)
     - [Reglas que se han aprendido por el camino](#reglas-que-se-han-aprendido-por-el-camino)
+  - [Diseño adaptable (responsive)](#diseño-adaptable-responsive)
+    - [Puntos de corte](#puntos-de-corte)
+    - [Dónde va cada cambio](#dónde-va-cada-cambio)
+    - [Qué maqueta manda](#qué-maqueta-manda)
+    - [Patrones de rejilla](#patrones-de-rejilla)
+    - [Imágenes](#imágenes)
+    - [Hover y pantallas táctiles](#hover-y-pantallas-táctiles)
   - [Reset (`reset.css`)](#reset-resetcss)
   - [Sistema de tokens](#sistema-de-tokens)
     - [Por qué dos capas](#por-qué-dos-capas)
@@ -40,6 +47,7 @@ Es un proyecto formativo: sirve como modelo para el alumnado de un curso de crea
   - [Política de compatibilidad](#política-de-compatibilidad)
   - [Entorno de desarrollo](#entorno-de-desarrollo)
   - [Registro de decisiones](#registro-de-decisiones)
+  - [| Una columna del pie tenía un `h2` con estilo y otro sin él | Clase `.titulo-pie` en todos; alternativa valorada: un selector de etiqueta `h2` dentro del `@scope` |](#-una-columna-del-pie-tenía-un-h2-con-estilo-y-otro-sin-él--clase-titulo-pie-en-todos-alternativa-valorada-un-selector-de-etiqueta-h2-dentro-del-scope-)
   - [Cómo se ha desarrollado](#cómo-se-ha-desarrollado)
   - [Pendiente](#pendiente)
   - [Créditos](#créditos)
@@ -63,6 +71,12 @@ mi-web/
 │   └── main.js
 ├── assets/
 │   ├── img/
+│   │   ├── logo.svg
+│   │   ├── pizza.png           ← imágenes compartidas, en la raíz de img/
+│   │   └── index/
+│   │       └── ambiente/       ← las propias de una página, en una carpeta
+│   │           ├── 1.jpg          por página y otra por sección
+│   │           └── …
 │   ├── icons/
 │   │   ├── iconos.svg          ← sprite con todos los iconos
 │   │   ├── favicon.ico
@@ -70,12 +84,11 @@ mi-web/
 │   │   ├── favicon-96x96.png
 │   │   ├── apple-touch-icon.png
 │   │   └── site.webmanifest
-│   ├── fonts/
-│   │   ├── oswald.woff2
-│   │   ├── source-sans-3.woff2
-│   │   └── source-sans-3-italic.woff2
-│   └── media/
-└── README.md
+│   └── fonts/
+│       ├── subset-Oswald-Regular.woff2
+│       ├── subset-SourceSans3-Roman.woff2
+│       └── subset-SourceSans3-Italic.woff2
+└── readme.md
 ```
 
 El proyecto se organiza según la función de cada archivo:
@@ -84,7 +97,9 @@ El proyecto se organiza según la función de cada archivo:
 - **`css/`**: el código de presentación.
 - **`js/`**: el código de comportamiento.
 - **`assets/`**: los recursos que usa el código pero que no se editan como código (imágenes, iconos, tipografías, vídeo y audio).
-- **`README.md`**: la documentación.
+- **`readme.md`**: la documentación.
+
+**Imágenes por página y sección.** Las que solo usa una página van en una carpeta con su nombre (`img/index/`), y dentro, una subcarpeta por sección (`ambiente/`). Las que comparten varias páginas (el logo) quedan en la raíz de `img/`. Así, al crecer el proyecto, se sabe de dónde es cada archivo.
 
 La separación entre estructura (HTML), presentación (CSS), comportamiento (JS) y recursos reproduce de forma simplificada la organización profesional: con herramientas como Vite, estas mismas carpetas pasan a estar dentro de `src/`.
 
@@ -142,8 +157,10 @@ Se cargan con varios `<link>` en el `<head>`, y no con `@import`, porque así el
 
 1. **Base**: estilos de etiquetas (`body`, encabezados).
 2. **Componentes globales**: piezas que se usan en toda la web (`.boton` y sus variantes).
-3. **Secciones y componentes con `@scope`**: cabecera, portada, información, pizzas, tarjeta, cervezas, filosofía, bloque, ambiente, pie, opiniones, contacto, reservas…
+3. **Secciones y componentes con `@scope`**: cabecera, menú, portada, información, pizzas, tarjeta, cervezas, filosofía, bloque, ambiente, opiniones, opinión, reservas, formulario, contacto y pie.
 4. **Utilidades**: clases de uso general (`.contenedor`, `.solo-lectores`).
+
+**El formulario es un componente aparte.** `.formulario` tiene su propio `@scope`, y el de la sección de reservas lo deja fuera con `@scope (.reservas) to (.formulario)`. La sección decide **dónde** se coloca el formulario; el formulario decide **cómo es por dentro**. Así se puede reutilizar en otra página (por ejemplo, `reservas.html`) sin arrastrar estilos de la sección.
 
 ---
 
@@ -177,6 +194,91 @@ BEM se sigue enseñando porque aparece en muchos proyectos existentes y hay que 
 - **No aumenta la especificidad:** `.logo` dentro de `@scope (.cabecera)` pesa lo mismo que una clase suelta, (0,1,0). En cambio, `.cabecera .logo` pesa (0,2,0).
 - **Los ámbitos no se anidan:** cada componente tiene su propio bloque `@scope` al mismo nivel, para que el comportamiento sea predecible.
 - **El anidamiento nativo** (`&:hover`, `@media` dentro de una regla) se usa para estados y media queries, no para simular jerarquías de componentes.
+- **Reglas «por defecto» y excepciones con el mismo peso:** `:scope > * { grid-column: 1 / -1 }` y `.campo-reserva { grid-column: span 3 }` pesan lo mismo, así que decide el orden: las excepciones van **después** de la regla general.
+- **Un `}` que falta se traga lo que viene detrás:** si una llave queda sin cerrar dentro de un `@scope`, los bloques siguientes quedan anidados dentro y dejan de funcionar sin dar error. Al editar, conviene comprobar que el editor colorea igual el bloque siguiente.
+
+---
+
+## Diseño adaptable (responsive)
+
+### Puntos de corte
+
+El diseño es **mobile first**: los estilos base son los de móvil y las media queries usan `min-width` para ampliar. Hay **dos puntos de corte**:
+
+| Pantalla | Ancho | Se escribe |
+|---|---|---|
+| Móvil | < 768 px | (estilos base) |
+| Tablet | 768 – 1023 px | `@media (min-width: 768px)` |
+| Escritorio | ≥ 1024 px | `@media (min-width: 1024px)` |
+
+Una versión anterior tenía un tercer punto, en 640 px. Se eliminó: ninguna de las maquetas lo necesitaba y cada punto de corte es una decisión más que mantener. Los valores van escritos a mano en cada media query porque las variables CSS no se pueden usar dentro de ellas.
+
+**Excepción pendiente de revisar: la cabecera cambia en 798 px.** El menú pasa de botón hamburguesa a barra horizontal en 798 px y no en 768 como el resto del diseño. Hay que decidir si es un punto de corte propio del componente (y documentar el motivo) o un error al escribir 768. Ver [Pendiente](#pendiente).
+
+### Dónde va cada cambio
+
+| Tipo de cambio | Dónde | Ejemplo |
+|---|---|---|
+| **De valor** (tamaños de titular, margen lateral, hueco entre columnas) | En `semanticos.css`, redefiniendo el token dentro de un `@media` | `--margen-pagina` pasa de 16 a 32 px desde 768 px |
+| **De estructura** (número de columnas, dirección, orden, qué ocupa qué) | En `styles.css`, con un `@media` **anidado dentro de la regla** del elemento, dentro de su `@scope` | `grid-template-columns` de la portada |
+
+```css
+@scope (.pizzas) to (.tarjeta > *) {
+  ul {
+    display: grid;
+    gap: var(--espacio-md);
+
+    @media (min-width: 768px)  { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 1024px) { grid-template-columns: 1fr 1fr 1fr; }
+  }
+}
+```
+
+**Por qué así:** todo el comportamiento de un elemento (cómo es en móvil, en tablet y en escritorio) queda en un único sitio. Si hay que cambiar algo de las pizzas, se mira un bloque y no tres. La alternativa, un bloque de media queries al final del archivo con todas las secciones mezcladas, obliga a buscar por todo el CSS.
+
+**Las media queries de valor no tocan los componentes:** cuando los titulares crecen en escritorio, ningún componente cambia; cambia el token `--tamano-titulo-xl` y todo lo que lo usa se adapta.
+
+### Qué maqueta manda
+
+El proyecto tiene tres maquetas de referencia (móvil, tablet y escritorio), generadas por separado con Stitch. En la de escritorio, muchas disposiciones empiezan en el `md` de Tailwind (768 px), que no es lo que aquí se llama «tablet». **Regla: entre 768 y 1023 px manda la maqueta de tablet; desde 1024 px, la de escritorio.** Las diferencias de contenido entre maquetas (textos, número de horas en el formulario, etiquetas más cortas) **no se replican**: el HTML es único y usa la versión más completa. Lo que cambia con el ancho es la disposición, nunca el contenido.
+
+**Nada se esconde con `display: none`** para «simplificar» el móvil. Si un contenido importa, se ve en todas las pantallas; si no importa, no está en el HTML.
+
+### Patrones de rejilla
+
+- **Alinear:** en grid, `justify-*` es el eje horizontal y `align-*` el vertical. Los hijos se estiran a la altura de la fila por defecto (`align-items: stretch`); con `align-items: center` o `start` se evita.
+- **Columnas desiguales:** con `fr`. Se escribe `minmax(0, 7fr) minmax(0, 5fr)` y no `7fr 5fr`: un `fr` por sí solo no baja del tamaño mínimo de su contenido, y una imagen o un campo de fecha podrían ensanchar su columna.
+- **Colocar un elemento en una columna sin cambiar el HTML.** En la portada la imagen es el tercer elemento (así se ve en móvil y se lee en ese orden), pero en escritorio va a la derecha, ocupando las filas de los textos:
+
+  ```css
+  img {
+    @media (min-width: 1024px) {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+    }
+  }
+  ```
+
+  `1 / -1` no sirve aquí: `-1` es el final de la rejilla **explícita**, y estas filas son implícitas.
+- **Que una imagen alta no estire las filas de al lado:** si la imagen ocupa varias filas y es más alta que ellas, grid reparte el sobrante entre esas filas y los textos se separan. Se evita dando todo el sobrante a la última fila (`grid-template-rows: auto auto 1fr`) y fijando la proporción de la imagen.
+- **Zigzag (imagen a un lado y al otro):** con `order` y `:nth-of-type(even)`, no con `row-reverse`. Se usa `nth-of-type` y no `nth-child` porque un hermano de otro tipo (el `hgroup`) desplazaría la cuenta.
+- **Tarjetas huérfanas:** con 2 columnas en tablet y 3 en escritorio, un número de elementos múltiplo de 6 no deja huecos. Si queda una tarjeta suelta, se alinea a la izquierda y no se estira ni se centra: una tarjeta que cambia de forma respecto a las demás resulta rara.
+- **Formularios con rejilla de 6 columnas.** Cada campo decide cuántas ocupa: nombre y teléfono, 6 en móvil y 3+3 en tablet; fecha y turno, 3+3 en móvil; fecha, turno y personas, 2+2+2 en tablet. Con 6 columnas se pueden hacer mitades y tercios con la misma rejilla.
+
+### Imágenes
+
+La proporción se fija con `aspect-ratio` y `object-fit: cover`, en lugar de una altura en píxeles, para que la imagen mantenga su forma al cambiar el ancho de su columna.
+
+| Imagen | Móvil | Tablet | Escritorio |
+|---|---|---|---|
+| Portada | 8 / 5 | 5 / 2 | 1 / 1 |
+| Galería (ambiente) | 4 / 3 | 4 / 3 | 4 / 3 |
+
+La portada cambia de proporción porque el contenedor también lo hace (a ancho completo en móvil y tablet, en una columna en escritorio). En una retícula de varias fotos, la proporción es la misma en todos los anchos para que las filas queden alineadas.
+
+### Hover y pantallas táctiles
+
+Los efectos de ratón van dentro de `@media (hover: hover)`, para que no se queden «pegados» tras un toque en el móvil o la tablet. Se mantienen siempre `:focus-visible` y `:active`. Nada que sea contenido (como una descripción) depende del hover.
 
 ---
 
@@ -280,10 +382,19 @@ Dan función a los primitivos. Es la única capa que lee `styles.css`.
 ```css
 :root { --margen-pagina: var(--medida-16); }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   :root { --margen-pagina: var(--medida-32); }
 }
 ```
+
+Hoy se redefinen dos grupos de tokens:
+
+| Desde | Tokens que cambian |
+|---|---|
+| 768 px (tablet) | `--margen-pagina` (16 → 32 px) y `--separacion-columnas` (16 → 24 px) |
+| 1024 px (escritorio) | `--tamano-titulo-xl`, `-lg` y `-md` con sus interlineados |
+
+Los titulares no crecen en 768 px sino en 1024 px: en una tablet vertical, 56 px sigue siendo demasiado grande para el ancho disponible.
 
 ### Criterios
 
@@ -291,7 +402,7 @@ Dan función a los primitivos. Es la única capa que lee `styles.css`.
 - **Ritmo vertical:** el espaciado usa múltiplos de 8 px (con 4 px como medio paso) y los interlineados, múltiplos de 4 px. Los interlineados son medidas fijas y no valores sin unidades, como sería habitual, porque cada uno va unido a un tamaño concreto y hacen falta valores exactos para cuadrar la rejilla.
 - **Todo en `rem`:** si una persona aumenta el tamaño de letra en su navegador, toda la web escala con ella, rejilla incluida.
 - **Mobile first:** los valores base son los de móvil, y los `@media` redefinen algunas variables para pantallas mayores. No hacen falta tokens duplicados como `-movil`.
-- **Puntos de corte:** móvil < 640 px · tablet 640–1023 px · escritorio ≥ 1024 px. Se documentan en un comentario porque las variables CSS no se pueden usar dentro de una media query.
+- **Puntos de corte:** móvil < 768 px · tablet 768–1023 px · escritorio ≥ 1024 px. Se documentan en un comentario porque las variables CSS no se pueden usar dentro de una media query. Más detalle en [Diseño adaptable](#diseño-adaptable-responsive).
 - **Derivados con `color-mix()`:** cuando un valor no tiene peldaño propio (el fondo alterno, entre `neutro-10` y `neutro-20`) o es una transparencia (las sombras), se mezcla en la capa semántica en lugar de crear un hexadecimal nuevo.
 
 ### Correcciones sobre el diseño original
@@ -381,7 +492,9 @@ git grep -nE -- "--(rojo|verde|neutro|ambar)-[0-9]|--medida-|--letra-|--blanco" 
 - **Texto solo para lectores (`.solo-lectores`):** para botones que solo muestran un icono. No se usa `display: none`, que también lo oculta al lector de pantalla.
 - **Iconos decorativos** con `aria-hidden="true"`.
 - **Foco visible:** `:focus-visible` con el anillo de la marca (`--foco-anillo`), con contraste suficiente tanto sobre el fondo claro como sobre el pie oscuro. Nunca `outline: none` sin otro indicador.
-- **Área táctil mínima** de 44 × 44 px (`--tamano-tactil-minimo`) en botones y enlaces pulsables.
+- **Área táctil mínima** de 44 × 44 px (`--tamano-tactil-minimo`) en botones, enlaces pulsables y campos de formulario.
+- **Formularios:** cada campo tiene su `label` enlazada con `for`/`id`, `autocomplete` en los datos personales y el asterisco de «obligatorio» oculto al lector (`aria-hidden`), con una nota que lo explica. El borde de los campos usa `--color-neutro` (3:1) y no `--color-borde` (decorativo, 1,3:1), porque WCAG 1.4.11 exige 3:1 a los controles. El texto es de 16 px mínimo. El estado de error (`:user-invalid`) solo aparece después de interactuar con el campo y cambia además el grosor del borde, para no depender solo del color. La casilla de privacidad (RGPD) es obligatoria y nunca viene premarcada.
+- **Navegaciones etiquetadas:** cada `nav` se identifica por su encabezado (`aria-labelledby`) o con `aria-label`, para que el lector de pantalla distinga el menú principal, la navegación del pie y los enlaces legales. Los encabezados de columna del pie son `h2`: pertenecen al mismo nivel que las secciones y no son subapartados de la última (de ser `h3` quedarían anidados bajo «Contacto»). El aspecto se da con la clase `.titulo-pie`, no con la etiqueta.
 - **Menú:** el botón usa `aria-expanded` y `aria-controls`. El mismo atributo controla el CSS con `:has()`.
 - **Subrayado:** los enlaces del texto lo mantienen. En la sección de información se eliminó en el teléfono por coherencia visual con el horario y la dirección; es una decisión consciente, compensada con el anillo de foco.
 - **Movimiento reducido:** se respeta la preferencia del sistema operativo.
@@ -455,7 +568,14 @@ Problemas que surgieron durante el desarrollo y cómo se resolvieron:
 | ¿Una tercera capa de tokens por componente? | No: con dos capas basta |
 | El fondo alterno no tenía peldaño en la rampa | `color-mix()` entre `neutro-10` y `neutro-20` |
 | ¿Un archivo CSS más para los componentes globales? | Se valoró el coste en rendimiento (despreciable con HTTP/2) y se decidió por orden y claridad. Pendiente de la refactorización |
-
+| ¿Tres puntos de corte (640, 768, 1024) o dos? | Dos: 768 y 1024. Ninguna maqueta necesitaba el de 640 y cada punto es una decisión más que mantener |
+| ¿Dónde van los cambios por pantalla? | De valor, en los tokens (`semanticos.css`); de estructura, en un `@media` anidado dentro de la regla del elemento y dentro de su `@scope` |
+| Las maquetas de tablet y de escritorio no coincidían a 768 px | Entre 768 y 1023 px manda la de tablet; desde 1024, la de escritorio. El `md` de Tailwind no equivale a «tablet» |
+| Las tres maquetas del formulario eran distintas (horas, personas, etiquetas) | Un solo HTML con el contenido más completo; la disposición cambia con una rejilla de 6 columnas |
+| ¿Esconder en móvil lo que no cabe? | No: ningún contenido se oculta con `display: none`; si importa, se ve en todas las pantallas |
+| La imagen de la portada es el tercer elemento del HTML pero va a la derecha en escritorio | Rejilla con la imagen colocada con `grid-column` y `grid-row: 1 / span 3`, sin alterar el orden del documento |
+| Altura de imágenes en píxeles en la maqueta | `aspect-ratio` por tramo con `object-fit: cover` |
+| Una columna del pie tenía un `h2` con estilo y otro sin él | Clase `.titulo-pie` en todos; alternativa valorada: un selector de etiqueta `h2` dentro del `@scope` |
 ---
 
 ## Cómo se ha desarrollado
@@ -476,7 +596,9 @@ Se documenta porque usar una IA de forma responsable no significa ocultarlo, sin
 
 - [ ] Páginas secundarias: el menú enlaza a `carta.html`, `cervezas.html` y `reservas.html`, que aún no existen. «Ver todas las pizzas» tiene el `href` vacío.
 - [ ] Imágenes reales con su `alt` y sus atributos `width` y `height`.
+- [ ] Renombrar `assets/img/cerveza (1).jpg` (lleva espacios y paréntesis, contra la convención de nombres) y actualizar su ruta en `index.html`.
 - [ ] Revisar textos: tildes, espacios sin salto (`&nbsp;`) en precios, separadores (`·`), símbolo de grados (`°`).
+- [ ] Contenido de las maquetas que aún no está en la página: estilo, grado alcohólico (ABV), amargor (IBU) y descripción de cada cerveza, en todos los anchos.
 
 **CSS**
 
@@ -486,12 +608,19 @@ Se documenta porque usar una IA de forma responsable no significa ocultarlo, sin
 - [ ] Bordes entre las filas de cervezas: una sola línea entre filas.
 - [ ] Rojo de la marca en texto pequeño (antetítulos, botón secundario) → `--color-primario-intenso`.
 - [ ] `small { font-size: inherit; }` también en el pie (el formulario ya lo tiene): el navegador reduce `<small>` por su cuenta.
-- [ ] Comprobar que el logo del pie se ve sobre el fondo oscuro.
-- [ ] Versiones para tablet y escritorio (grid, retícula de 12 columnas en escritorio).
+- [ ] Comprobar que el logo del pie se ve sobre el fondo oscuro; si no, crear una versión `logo-invertido.svg`.
+- [ ] Cabecera: decidir si el punto de corte de 798 px es intencionado (y documentar el motivo) o si debe ser 768 px (aparece en `.cabecera` y en la regla del menú).
+- [ ] `@scope (.bloque)`: la llave de `:scope` no se cierra donde debe, así que el resto de reglas (`.textos`, `.imagen`, `.encabezado`…) quedan anidadas dentro de `:scope` y pesan más de lo que deberían. Cerrarla tras el `@media` y borrar las reglas vacías (`.textos {}` y el `@media` vacío de `.imagen`).
+- [ ] Sustituir `2.75rem` por `var(--tamano-tactil-minimo)` en los botones (el token existe).
+- [ ] Clases repetidas en cada `@scope` (`.encabezado`, `.titulo`, `.subtitulo`, `.nota`): unificarlas en el componente global de encabezado.
+- [ ] Estilos de los campos de formulario (`label`, `input`, `select`, `textarea`) a un componente global, para reutilizarlos en `reservas.html`.
+- [ ] Probar la web a 360, 768, 1024 y 1440 px para detectar desbordamientos horizontales.
+- [x] Versiones para tablet y escritorio (rejilla adaptable a dos puntos de corte).
 
 **Otros**
 
 - [ ] JavaScript del menú hamburguesa (`aria-expanded`).
+- [ ] JavaScript del formulario de reservas: fecha mínima de hoy en el campo de fecha y envío (ahora `action="#"` es provisional).
 - [ ] `site.webmanifest`: nombre, colores y rutas de iconos (aún tiene los valores de ejemplo). Los colores del manifiesto se escriben a mano y deben coincidir con `--color-fondo` y `--color-primario`.
 - [ ] Open Graph: etiquetas `og:` para compartir en redes (herramientas: opengraph.xyz para previsualizar; Sharing Debugger de Facebook y Post Inspector de LinkedIn una vez publicada).
 - [ ] Precarga de Oswald: `<link rel="preload">`.

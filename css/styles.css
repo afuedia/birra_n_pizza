@@ -8,30 +8,25 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--fuente-titulos);
+  font-weight: var(--peso-negrita);
   color: var(--color-texto);
   text-transform: uppercase;
+  letter-spacing: var(--espacio-letras-titulo);
 }
 
 h1 {
   font-size: var(--tamano-titulo-xl);
   line-height: var(--interlineado-titulo-xl);
-  font-weight: var(--peso-negrita);
-  letter-spacing: var(--espacio-letras-titulo);
-
 }
 
 h2 {
   font-size: var(--tamano-titulo-lg);
   line-height: var(--interlineado-titulo-lg);
-  font-weight: var(--peso-negrita);
-  letter-spacing: var(--espacio-letras-titulo);
 }
 
 h3 {
   font-size: var(--tamano-titulo-md);
   line-height: var(--interlineado-titulo-md);
-  font-weight: var(--peso-negrita);
-  letter-spacing: var(--espacio-letras-titulo);
 }
 
 .boton {
@@ -52,11 +47,14 @@ h3 {
     z-index: var(--capa-navegacion);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--espacio-sm);
-    padding: var(--espacio-sm) var(--margen-pagina);
+    padding-block: var(--espacio-sm);
     background-color: var(--color-fondo);
     border-bottom: var(--borde-base);
+    @media (min-width: 798px) {
+      padding-inline: 0;
+    }
   }
   .contenedor {
     display: flex;
@@ -123,7 +121,7 @@ h3 {
     border-radius: var(--radio-md);
     transition: color var(--transicion-base);
 
-    /* El anidamiento sigue siendo útil para estados y media queries */
+    
     &:hover {
       color: var(--color-primario);
     }
@@ -148,7 +146,7 @@ h3 {
   :scope:has(.abrir-menu[aria-expanded="true"]) .menu {
     display: block;
     position: absolute;
-    top: 100%;                     /* Justo debajo de la cabecera */
+    top: 100%;                     
     left: 0;
     right: 0;
     background-color: var(--color-fondo);
@@ -157,16 +155,61 @@ h3 {
   }
 
   /* ---------- Escritorio ---------- */
-  @media (min-width: 1024px) {
+  
+  
+  @media (min-width: 798px) {
     .menu {
       display: block;
-      flex: 1;                     /* Ocupa el espacio entre logo y acciones */
+      flex: 1;                 
+      
     }
+    
 
     .abrir-menu {
       display: none;               /* En escritorio el menú ya está visible */
     }
   }
+}
+
+@scope (.menu) {
+  .lista {
+        height: 100%;
+        display: flex;
+        gap: var(--espacio-md);
+        justify-content: center;
+      }
+    
+a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tamano-tactil-minimo);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: var(--tamano-etiqueta-sm);
+  font-weight: var(--peso-seminegrita);          /* 600 */
+  color: var(--color-texto);
+  letter-spacing: var(--espacio-letras-etiqueta);
+  border-block-end: var(--borde-grosor-fuerte) solid transparent;
+
+  &:focus-visible {
+    outline: var(--foco-anillo);
+    outline-offset: var(--foco-separacion);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-primario-intenso);
+      border-block-end-color: var(--color-primario-intenso);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    text-transform: none;
+    font-size: var(--tamano-etiqueta-lg);
+    font-weight: var(--peso-medio);              /* 500 */
+    letter-spacing: normal;
+  }
+}
 }
 
 
@@ -180,11 +223,13 @@ h3 {
     width: 100%;
     max-width: var(--ancho-maximo);
     margin-inline: var(--margen-pagina);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--espacio-md)
+    display: grid;
+    gap: var(--espacio-md);
+    @media (min-width: 1024px) {
+      gap: var(--espacio-xl);
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      grid-template-rows: auto auto 1fr;
+    }
   }
   .acciones{
     display: flex;
@@ -210,13 +255,31 @@ h3 {
     color: var(--color-sobre-accion);
   }
   }
+  img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 8 / 5;
 
+  @media (min-width: 768px) {
+    aspect-ratio: 5 / 2;
+  }
+  @media (min-width: 1024px) {
+    aspect-ratio: 1 / 1;
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+  }
+}
+ 
   .datos{
     width: 100%;
     display: flex;
     list-style: none;
-    justify-content: space-between;
-    padding: 0
+    justify-content: space-around;
+    padding: 0;
+    @media (min-width: 1024px) {
+      justify-content: space-between;
+    }
   }
     .dato {
       display: flex;
@@ -475,8 +538,16 @@ h3 {
 
   
   .encabezado {
-    
+    display: grid;
     gap: var(--espacio-2xs);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
   }
 
   .titulo {
@@ -486,7 +557,7 @@ h3 {
     font-weight: var(--peso-negrita);
     letter-spacing: var(--espacio-letras-etiqueta);
     text-transform: uppercase;
-    color: var(--color-primario-intenso);   /* Rojo que cumple con texto pequeño */
+    color: var(--color-primario-intenso);
   }
 
   .subtitulo {
@@ -632,6 +703,12 @@ h3 {
   .encabezado {
     display: grid;
     gap: var(--espacio-2xs);
+    @media (min-width: 768px) {
+      
+    }
+    @media (min-width: 1024px) {
+      justify-items: center;
+    }
   }
 
   .sobretitulo {
@@ -647,9 +724,12 @@ h3 {
   .lista {
     display: grid;
     gap: var(--espacio-sm);
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;    
   }
 }
-
+}
 
 @scope (.opinion) {
 
@@ -661,6 +741,7 @@ h3 {
     border: var(--borde-base);
     border-radius: var(--radio-sm);
     box-shadow: var(--sombra-base);
+    height: 100%;
   }
 
   .estrellas {
@@ -745,12 +826,31 @@ h3 {
 
   :scope {
     display: grid;
+    /* Rejilla de 6 columnas: cada campo decide cuántas ocupa.
+       minmax(0, 1fr) y no 1fr: el selector de fecha tiene un ancho mínimo
+       propio y, con 1fr, podría empujar la columna y desbordar en móvil */
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--espacio-sm);
     padding: var(--espacio-md);
     background-color: var(--color-superficie);
     border: var(--borde-base);
     border-radius: var(--radio-sm);
     box-shadow: var(--sombra-base);
+
+    /* Por defecto, cada hijo ocupa la fila entera. Los modificadores de
+       abajo lo sobrescriben: deben ir DESPUÉS (misma especificidad, gana
+       el orden) */
+    > * {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .titulo-formulario {
+    padding-block-end: var(--espacio-xs);
+    border-block-end: var(--borde-base);
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-titulo-sm);
+    text-transform: uppercase;
   }
 
   .nota,
@@ -773,13 +873,26 @@ h3 {
     min-width: 0;                    /* Un hijo de grid no se encoge por debajo de su contenido */
   }
 
-  /* Fecha y turno en la misma fila.
-     minmax(0, 1fr) y no 1fr: el selector de fecha tiene un ancho mínimo
-     propio y, con 1fr, podría empujar la columna y desbordar en móvil */
-  .fila {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--espacio-sm);
+  /* Reparto de columnas (6 en total).
+     Móvil:  nombre y teléfono 6 · fecha y turno 3+3 · personas 6
+     Tablet: nombre y teléfono 3+3 · fecha, turno y personas 2+2+2 */
+  .campo-contacto {
+    @media (min-width: 768px) {
+      grid-column: span 3;
+    }
+  }
+
+  .campo-reserva {
+    grid-column: span 3;
+    @media (min-width: 768px) {
+      grid-column: span 2;
+    }
+  }
+
+  .campo-personas {
+    @media (min-width: 768px) {
+      grid-column: span 2;
+    }
   }
 
   label {
@@ -794,7 +907,7 @@ h3 {
   select,
   textarea {
     width: 100%;
-    min-height: 2.75rem;             /* 44px de área táctil */
+    min-height: var(--tamano-tactil-minimo);   /* 44px de área táctil */
     padding-inline: var(--espacio-sm);
     color: var(--color-texto);
     background-color: var(--color-fondo);
@@ -861,7 +974,6 @@ h3 {
   }
 }
 
-
 /* ==========================================================================
    CONTACTO
    ========================================================================== */
@@ -894,6 +1006,18 @@ h3 {
   }
 
   /* Recuadros de datos y horario */
+  .informacion_contacto {
+    display: grid;
+    gap: var(--espacio-sm);
+    @media (min-width: 768px){
+      grid-template-columns: 1fr 1fr;
+    }
+    
+  }
+  .cajas {
+    display: grid;
+    gap: var(--espacio-sm);
+  }
   .caja {
     display: grid;
     gap: var(--espacio-xs);
@@ -977,32 +1101,81 @@ h3 {
     padding-block: var(--espacio-xl);
     border-top: var(--borde-grosor-acento) solid var(--color-primario);
     text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
   }
 
-  /* El reset pone las imágenes en display: block,
-     y text-align solo centra contenido en línea */
+  .contenedor {
+    width: 100%;
+    max-width: var(--ancho-maximo);
+    margin-inline: var(--margen-pagina);
+    display: grid;
+    gap: var(--espacio-lg);
+
+    @media (min-width: 768px) {
+      /* Proporción de la maqueta: 5/3/4 */
+      grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr);
+    }
+  }
+
+  /* Encabezados de columna: nivel h2, aspecto de etiqueta */
+  .titulo-pie {
+    margin-block-end: var(--espacio-sm);
+    font-family: var(--fuente-titulos);
+    font-size: var(--tamano-etiqueta-lg);
+    font-weight: var(--peso-negrita);
+    letter-spacing: var(--espacio-letras-etiqueta);
+    text-transform: uppercase;
+    color: var(--color-texto-invertido);
+  }
+
   .logotipo {
     display: flex;
     justify-content: center;
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+    }
   }
-
+  :is(div):has(> .titulo-pie) {
+  display: grid;
+  gap: var(--espacio-sm);
+  align-content: start;
+}
   .descripcion {
     color: var(--color-texto-invertido-suave);
   }
 
-  .enlaces, .redes, .enlaces-legales {
+  .enlaces {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--espacio-sm);
+
+    @media (min-width: 768px) {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+
+  .redes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+    }
   }
 
   /* Área táctil mínima de 44 × 44px */
   .redes a {
     display: grid;
     place-items: center;
-    min-width: 2.75rem;
-    min-height: 2.75rem;
+    min-width: var(--tamano-tactil-minimo);
+    min-height: var(--tamano-tactil-minimo);
     background-color: var(--color-superficie-invertida);
     border-radius: var(--radio-sm);
     text-decoration: none;
@@ -1030,6 +1203,24 @@ h3 {
     color: var(--color-texto-invertido-suave);
     font-size: var(--tamano-texto-sm);
     line-height: var(--interlineado-texto-sm);
+
+    @media (min-width: 768px) {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .enlaces-legales {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espacio-sm);
+
+    @media (min-width: 768px) {
+      gap: var(--espacio-md);
+    }
   }
 }
 

@@ -333,10 +333,13 @@
                 <li>Sin levaduras químicas ni acelerantes</li>
                 <li>Horneado en piedra refractaria a 450 °C</li>
               </ul>
-              
             </div>
 
-            <img class="imagen" src="assets/img/obrador.jpg" alt="Maestro pizzero estirando la masa madre artesanal a mano" />
+            <img
+              class="imagen"
+              src="assets/img/obrador.jpg"
+              alt="Maestro pizzero estirando la masa madre artesanal a mano"
+            />
           </article>
 
           <article class="bloque">
@@ -345,14 +348,21 @@
                 <h3 class="titulo">02 - El brewhouse</h3>
                 <p class="subtitulo">Cervezas elaboradas en el mismo local</p>
               </hgroup>
-              <p class="explicacion">8 grifos conectados a cámara frigorífica a 4 °C para conservar la máxima frescura de microcerveceras independientes.</p>
+              <p class="explicacion">
+                8 grifos conectados a cámara frigorífica a 4 °C para conservar
+                la máxima frescura de microcerveceras independientes.
+              </p>
               <p class="nota">Elaboradas con cariño</p>
               <ul>
                 <li>Limpieza y purga tras cada barril</li>
                 <li>Asesoramiento de maridaje con tu pizza</li>
               </ul>
             </div>
-            <img class="imagen" src="assets/img/cerveza (1).jpg" alt="Grifos de cerveza artesanal tirando cerveza fresca con espuma" />
+            <img
+              class="imagen"
+              src="assets/img/cerveza (1).jpg"
+              alt="Grifos de cerveza artesanal tirando cerveza fresca con espuma"
+            />
           </article>
         </div>
       </section>
@@ -440,13 +450,19 @@
         </div>
       </section>
 
-      <section class="reservas">
-        <div class="contenedor">
-          <hgroup class="encabezado">
-            <h2 class="titulo">Reserva tu mesa</h2>
-            <p class="subtitulo">¡No te quedes sin ella!</p>
-          </hgroup>
-          <!-- ==========================================================================
+<section class="reservas" id="reserva">
+  <div class="contenedor">
+    <hgroup class="encabezado">
+      <h2 class="titulo">Reserva tu mesa</h2>
+      <p class="subtitulo">¡No te quedes sin ella!</p>
+    </hgroup>
+
+    <p class="explicacion">
+      Aceptamos reservas online para comidas y cenas. Guardamos siempre un par
+      de mesas altas para quien se anime sin avisar.
+    </p>
+
+    <!-- ==========================================================================
      FORMULARIO DE RESERVA
 
      <form> agrupa los controles y define a dónde y cómo se envían los datos:
@@ -455,154 +471,121 @@
      - method: "post" envía los datos dentro de la petición (lo normal para
        reservas o contacto). "get" los pone en la URL (para buscadores).
      ========================================================================== -->
-          <form class="formulario" action="#" method="post">
-            <!-- Avisar de qué es obligatorio ANTES del formulario, no después -->
-            <p class="nota">
-              Los campos marcados con <span aria-hidden="true">*</span> son
-              obligatorios.
-            </p>
+    <form class="formulario" action="#" method="post">
+      <h3 class="titulo-formulario">Datos de la reserva</h3>
 
-            <!-- Un .campo por cada pareja etiqueta + control: así se maquetan igual
-       todos y se pueden colocar con grid o flex -->
-            <div class="campo">
-              <!-- LABEL: el texto que describe el campo. Se enlaza con el control
-         mediante for="" (aquí) e id="" (en el input): deben coincidir.
-         Así, al pulsar el texto se activa el campo y el lector de pantalla
-         anuncia "Nombre completo" al entrar en él.
-         El placeholder NO sustituye a la label: desaparece al escribir. -->
-              <label for="nombre"
-                >Nombre completo <span aria-hidden="true">*</span></label
-              >
+      <p class="nota">
+        Los campos marcados con <span aria-hidden="true">*</span> son
+        obligatorios.
+      </p>
 
-              <!-- id  → para enlazar con la label (único en toda la página)
-         name → el nombre con el que viaja el dato al servidor.
-                SIN name, el campo no se envía.
-         autocomplete → el navegador rellena el dato él solo ("name", "tel"…) -->
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                autocomplete="name"
-                placeholder="Marta Gómez"
-                required
-              />
-              <!-- required: el navegador impide enviar el formulario si está vacío -->
-            </div>
+      <div class="campo campo-contacto">
+        <label for="nombre">Nombre completo <span aria-hidden="true">*</span></label>
+        <!-- id  → para enlazar con la label (único en toda la página)
+             name → el nombre con el que viaja el dato al servidor.
+                    SIN name, el campo no se envía.
+             autocomplete → el navegador rellena el dato él solo ("name", "tel"…) -->
+        <input type="text" id="nombre" name="nombre" autocomplete="name"
+               placeholder="Marta Gómez" required />
+        <!-- required: el navegador impide enviar el formulario si está vacío -->
+      </div>
 
-            <div class="campo">
-              <label for="telefono"
-                >Teléfono móvil <span aria-hidden="true">*</span></label
-              >
-              <!-- type="tel": en el móvil muestra el teclado numérico.
-         No valida el formato: solo cambia el teclado. -->
-              <input
-                type="tel"
-                id="telefono"
-                name="telefono"
-                autocomplete="tel"
-                placeholder="600 000 000"
-                required
-              />
-            </div>
+      <div class="campo campo-contacto">
+        <label for="telefono">Teléfono móvil <span aria-hidden="true">*</span></label>
+        <!-- type="tel": en el móvil muestra el teclado numérico.
+             No valida el formato: solo cambia el teclado. -->
+        <input type="tel" id="telefono" name="telefono" autocomplete="tel"
+               placeholder="600 000 000" required />
+      </div>
 
-            <!-- Fecha y turno comparten fila en la maqueta -->
-            <div class="fila">
-              <div class="campo">
-                <label for="fecha"
-                  >Fecha <span aria-hidden="true">*</span></label
-                >
-                <!-- type="date": selector de fecha nativo. Admite min="" y max=""
-           (el "mínimo = hoy" se pone con JavaScript, porque cambia cada día) -->
-                <input type="date" id="fecha" name="fecha" required />
-              </div>
+      <div class="campo campo-reserva">
+        <label for="fecha">Fecha <span aria-hidden="true">*</span></label>
+        <!-- type="date": selector de fecha nativo. Admite min="" y max=""
+             (el "mínimo = hoy" se pone con JavaScript, porque cambia cada día) -->
+        <input type="date" id="fecha" name="fecha" required />
+      </div>
 
-              <div class="campo">
-                <label for="turno"
-                  >Turno <span aria-hidden="true">*</span></label
-                >
-                <!-- SELECT: lista desplegable. Cada <option> tiene:
-           - value → lo que se ENVÍA al servidor
-           - texto → lo que VE la persona
-           selected marca la opción por defecto -->
-                <select id="turno" name="turno" required>
-                  <option value="14:00">14:00 h</option>
-                  <option value="15:00">15:00 h</option>
-                  <option value="21:00" selected>21:00 h</option>
-                  <option value="22:30">22:30 h</option>
-                </select>
-              </div>
-            </div>
+      <div class="campo campo-reserva">
+        <label for="turno">Turno <span aria-hidden="true">*</span></label>
+        <!-- SELECT: lista desplegable. Cada <option> tiene:
+             - value → lo que se ENVÍA al servidor
+             - texto → lo que VE la persona
+             La primera opción, vacía y deshabilitada, obliga a elegir.
+             <optgroup> agrupa las opciones con un título. -->
+        <select id="turno" name="turno" required>
+          <option value="" disabled selected>Selecciona turno</option>
+          <optgroup label="Comidas">
+            <option value="13:30">13:30 h</option>
+            <option value="14:15">14:15 h</option>
+            <option value="15:00">15:00 h</option>
+          </optgroup>
+          <optgroup label="Cenas">
+            <option value="20:30">20:30 h</option>
+            <option value="21:15">21:15 h</option>
+            <option value="22:00">22:00 h</option>
+            <option value="22:45">22:45 h</option>
+          </optgroup>
+        </select>
+      </div>
 
-            <div class="campo">
-              <label for="personas"
-                >Número de personas <span aria-hidden="true">*</span></label
-              >
-              <!-- type="number" con min y max: valida el rango.
-         (La maqueta usa un select; aquí se ve otra forma de resolverlo.) -->
-              <input
-                type="number"
-                id="personas"
-                name="personas"
-                min="1"
-                max="12"
-                value="2"
-                required
-              />
-            </div>
+      <div class="campo campo-personas">
+        <label for="personas">Número de personas <span aria-hidden="true">*</span></label>
+        <!-- type="number" con min y max: valida el rango.
+             (La maqueta usa un select; aquí se ve otra forma de resolverlo.) -->
+        <input type="number" id="personas" name="personas" min="1" max="8"
+               value="2" required />
+      </div>
 
-            <div class="campo">
-              <label for="comentarios"
-                >Comentarios (alergias, celebraciones…)</label
-              >
-              <!-- TEXTAREA: texto largo. No es una etiqueta vacía: el contenido va
-         ENTRE las etiquetas y no lleva value=""
-         rows → altura inicial; maxlength → límite de caracteres -->
-              <textarea
-                id="comentarios"
-                name="comentarios"
-                rows="3"
-                maxlength="300"
-                placeholder="Celiaquía, trona para bebé…"
-              ></textarea>
-            </div>
+      <div class="campo campo-completo">
+        <label for="comentarios">Comentarios (alergias, celebraciones…)</label>
+        <!-- TEXTAREA: texto largo. No es una etiqueta vacía: el contenido va
+             ENTRE las etiquetas y no lleva value=""
+             rows → altura inicial; maxlength → límite de caracteres -->
+        <textarea id="comentarios" name="comentarios" rows="3" maxlength="300"
+                  placeholder="Celiaquía, trona para bebé…"></textarea>
+      </div>
 
-            <!-- CASILLA DE CONSENTIMIENTO (RGPD): obligatoria y NUNCA premarcada.
-       Con checkbox y radio, el input va ANTES de la label (así se maqueta
-       mejor con flex) y el for/id funciona igual. -->
-            <div class="campo campo-casilla">
-              <input
-                type="checkbox"
-                id="privacidad"
-                name="privacidad"
-                required
-              />
-              <label for="privacidad">
-                He leído y acepto la
-                <a href="privacidad.html">política de privacidad</a>.
-                <span aria-hidden="true">*</span>
-              </label>
-            </div>
+      <!-- CASILLA DE CONSENTIMIENTO (RGPD): obligatoria y NUNCA premarcada.
+           Con checkbox y radio, el input va ANTES de la label (así se maqueta
+           mejor con flex) y el for/id funciona igual. -->
+      <div class="campo campo-casilla">
+        <input type="checkbox" id="privacidad" name="privacidad" required />
+        <label for="privacidad">
+          He leído y acepto la
+          <a href="privacidad.html">política de privacidad</a>.
+          <span aria-hidden="true">*</span>
+        </label>
+      </div>
 
-            <!-- Información básica del RGPD (primera capa): quién, para qué y cómo
-       ejercer los derechos. El resto, en la política de privacidad. -->
-            <p class="informacion-legal">
-              <small
-                >Responsable: Birra N Pizza S.L. Finalidad: gestionar tu
-                reserva. Puedes ejercer tus derechos en
-                hola@birranpizza.es.</small
-              >
-            </p>
+      <!-- Información básica del RGPD (primera capa): quién, para qué y cómo
+           ejercer los derechos. El resto, en la política de privacidad. -->
+      <p class="informacion-legal">
+        <small>Responsable: Birra N Pizza S.L. Finalidad: gestionar tu reserva.
+          Puedes ejercer tus derechos en hola@birranpizza.es.</small>
+      </p>
 
-            <!-- BOTÓN: <button type="submit"> envía el formulario.
-       <input type="button"> no hace NADA sin JavaScript (es lo que tenías).
-       Como es un botón que HACE algo, es <button>, no <a>. -->
-            <button type="submit" class="boton boton-principal">
-              Confirmar reserva
-            </button>
-          </form>
-          <!-- Aquí va un formulario, repasito -->
-        </div>
-      </section>
+      <!-- BOTÓN: <button type="submit"> envía el formulario.
+           <input type="button"> no hace NADA sin JavaScript.
+           Como es un botón que HACE algo, es <button>, no <a>. -->
+      <button type="submit" class="boton boton-principal">Confirmar reserva</button>
+    </form>
+
+    <div class="avisos">
+      <p class="aviso">
+        <strong>Grupos de más de 8 personas</strong>
+        Escríbenos o llámanos para coordinar un menú cerrado.
+      </p>
+      <p class="aviso">
+        <strong>Take Away</strong>
+        Llámanos al <a href="tel:+34912345678">912 345 678</a> con 25 minutos
+        de antelación.
+      </p>
+      <p class="nota">
+        Guardamos la reserva 15 minutos de cortesía sobre la hora fijada.
+      </p>
+    </div>
+  </div>
+</section>
 
       <section class="contacto" id="contacto">
         <div class="contenedor">
@@ -610,56 +593,58 @@
             <p class="sobretitulo">Encuéntranos</p>
             <h2 class="titulo">Contacto y ubicación</h2>
           </hgroup>
+          <div class="informacion_contacto">
+            <div class="cajas">
+              <address class="caja">
+                <p>
+                  <strong>Dirección:</strong> Calle de la Cebada, 84, Armeñime
+                  (Tenerife)
+                </p>
+                <p>
+                  <strong>Teléfono:</strong>
+                  <a href="tel:+34922000000">922&nbsp;000&nbsp;000</a>
+                </p>
+                <p>
+                  <strong>Correo:</strong>
+                  <a href="mailto:hola@birranpizza.es">hola@birranpizza.es</a>
+                </p>
+              </address>
 
-          <address class="caja">
-            <p>
-              <strong>Dirección:</strong> Calle de la Cebada, 84, Armeñime
-              (Tenerife)
-            </p>
-            <p>
-              <strong>Teléfono:</strong>
-              <a href="tel:+34922000000">922&nbsp;000&nbsp;000</a>
-            </p>
-            <p>
-              <strong>Correo:</strong>
-              <a href="mailto:hola@birranpizza.es">hola@birranpizza.es</a>
-            </p>
-          </address>
-
-          <div class="caja">
-            <h3 class="subtitulo">Horario semanal</h3>
-            <dl class="horario">
-              <div class="dia cerrado">
-                <dt>Lunes</dt>
-                <dd>Cerrado por descanso</dd>
+              <div class="caja">
+                <h3 class="subtitulo">Horario semanal</h3>
+                <dl class="horario">
+                  <div class="dia cerrado">
+                    <dt>Lunes</dt>
+                    <dd>Cerrado por descanso</dd>
+                  </div>
+                  <div class="dia">
+                    <dt>Martes a jueves</dt>
+                    <dd>13:00–16:30 · 20:00–23:30</dd>
+                  </div>
+                  <div class="dia">
+                    <dt>Viernes y sábado</dt>
+                    <dd>13:00–01:00</dd>
+                  </div>
+                  <div class="dia">
+                    <dt>Domingo</dt>
+                    <dd>12:30–17:00 · 20:00–23:30</dd>
+                  </div>
+                </dl>
               </div>
-              <div class="dia">
-                <dt>Martes a jueves</dt>
-                <dd>13:00–16:30 · 20:00–23:30</dd>
-              </div>
-              <div class="dia">
-                <dt>Viernes y sábado</dt>
-                <dd>13:00–01:00</dd>
-              </div>
-              <div class="dia">
-                <dt>Domingo</dt>
-                <dd>12:30–17:00 · 20:00–23:30</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="mapa">
-            <img
-              src="assets/img/mapa.jpeg"
-              alt="Mapa de la zona con la ubicación de Birra N Pizza en la Calle de la Cebada"
-              width="800"
-              height="533"
-            />
-            <a
-              class="abrir-mapa"
-              href="https://www.google.com/maps/search/?api=1&query=Calle+de+la+Cebada+84+Armeñime"
-              >Abrir en Google Maps →</a
-            >
+            </div>
+            <div class="mapa">
+              <img
+                src="assets/img/mapa.jpeg"
+                alt="Mapa de la zona con la ubicación de Birra N Pizza en la Calle de la Cebada"
+                width="800"
+                height="533"
+              />
+              <a
+                class="abrir-mapa"
+                href="https://www.google.com/maps/search/?api=1&query=Calle+de+la+Cebada+84+Armeñime"
+                >Abrir en Google Maps →</a
+              >
+            </div>
           </div>
         </div>
       </section>
@@ -667,6 +652,7 @@
 
     <footer class="pie">
       <div class="contenedor">
+        <div>
         <p class="logotipo">
           <a href="index.html">
             <img
@@ -678,7 +664,10 @@
           </a>
         </p>
         <p class="descripcion">Masa madre y cervezas artesanales.</p>
+        </div>
+        
         <nav aria-label="Pie de página">
+          <h2 id="pie-navegacion" class="titulo-pie">Navegación</h2>
           <ul role="list" class="enlaces">
             <li><a href="#pizzas">Pizzas</a></li>
             <li><a href="#cervezas">Cervezas</a></li>
@@ -687,6 +676,9 @@
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
+
+        <div>
+          <h2 class="titulo-pie">Síguenos en redes</h2>
         <ul role="list" class="redes">
           <li>
             <a href="#">
@@ -711,7 +703,9 @@
           <strong>Consumo responsable:</strong> venta y consumo reservados a
           mayores de 18 años.
         </p>
-        <div class="legal">
+        
+</div>
+<div class="legal">
           <small class="letra-pequeña"
             >© 2026 Birra N Pizza · Proyecto formativo</small
           >
